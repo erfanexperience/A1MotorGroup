@@ -1,0 +1,1613 @@
+{
+  "available_requests": 5,
+  "data": {
+    "vehicle": {
+      "vin": "VSSZZZ7NZGV705789",
+      "make": {
+        "id": 10,
+        "make": "Seat",
+        "brandCode": "seat"
+      },
+      "stream_map": {
+        "production_date": {
+          "stream_group_id": 7,
+          "code": "production_date",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Production date",
+            "translationCurrent": "Production date"
+          },
+          "stream_result": "2015-08-28"
+        },
+        "model_name": {
+          "stream_group_id": 7,
+          "code": "model_name",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Model",
+            "translationCurrent": "Model"
+          },
+          "stream_result": {
+            "74179": {
+              "id": 74179,
+              "description": "Alhambra Advanced",
+              "code": "71147x",
+              "make_id": 10,
+              "option_group_id": 58,
+              "translation": {
+                "foreign_id": 74179,
+                "translation_en": "Alhambra Advanced",
+                "translationCurrent": "Alhambra Advanced"
+              }
+            }
+          }
+        },
+        "series": {
+          "stream_group_id": 7,
+          "code": "series",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Series",
+            "translationCurrent": "Series"
+          },
+          "stream_result": []
+        },
+        "generation": {
+          "stream_group_id": 7,
+          "code": "generation",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Generation",
+            "translationCurrent": "Generation"
+          },
+          "stream_result": []
+        },
+        "body_type": {
+          "stream_group_id": 7,
+          "code": "body_type",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Body type",
+            "translationCurrent": "Body type"
+          },
+          "stream_result": []
+        },
+        "type_code": {
+          "stream_group_id": 7,
+          "code": "type_code",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Type code",
+            "translationCurrent": "Type code"
+          },
+          "stream_result": {
+            "123919": {
+              "id": 123919,
+              "description": "71147X",
+              "code": "71147x",
+              "make_id": 10,
+              "option_group_id": 56,
+              "translation": {
+                "foreign_id": 123919,
+                "translation_en": "71147X",
+                "translationCurrent": "71147X"
+              }
+            }
+          }
+        },
+        "engine_code": {
+          "stream_group_id": 7,
+          "code": "engine_code",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Engine code",
+            "translationCurrent": "Engine code"
+          },
+          "stream_result": {
+            "4884": {
+              "id": 4884,
+              "description": "CUWA (DK7 : 4-cyl. turbo diesel engine 2.0 l/135 kW 4V TDI common rail base engine is TD1/TR1/T0N/T0P/T1I/T37)",
+              "code": "cuwa",
+              "make_id": 10,
+              "option_group_id": 57,
+              "translation": {
+                "foreign_id": 4884,
+                "translation_en": "CUWA (DK7 : 4-cyl. turbo diesel engine 2.0 l/135 kW 4V TDI common rail base engine is TD1/TR1/T0N/T0P/T1I/T37)",
+                "translationCurrent": "CUWA (DK7 : 4-cyl. turbo diesel engine 2.0 l/135 kW 4V TDI common rail base engine is TD1/TR1/T0N/T0P/T1I/T37)"
+              }
+            }
+          }
+        },
+        "system_power": {
+          "stream_group_id": 7,
+          "code": "system_power",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Power",
+            "translationCurrent": "Power"
+          },
+          "stream_result": 135
+        },
+        "fuel_type": {
+          "stream_group_id": 7,
+          "code": "fuel_type",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Fuel type",
+            "translationCurrent": "Fuel type"
+          },
+          "stream_result": []
+        },
+        "displacement": {
+          "stream_group_id": 7,
+          "code": "displacement",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Displacement",
+            "translationCurrent": "Displacement"
+          },
+          "stream_result": "2.00"
+        },
+        "drive_type": {
+          "stream_group_id": 7,
+          "code": "drive_type",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Drive type",
+            "translationCurrent": "Drive type"
+          },
+          "stream_result": []
+        },
+        "steering_side": {
+          "stream_group_id": 7,
+          "code": "steering_side",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Steering side",
+            "translationCurrent": "Steering side"
+          },
+          "stream_result": []
+        },
+        "color_code": {
+          "stream_group_id": 7,
+          "code": "color_code",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Color",
+            "translationCurrent": "Color"
+          },
+          "stream_result": {
+            "4913": {
+              "id": 4913,
+              "description": "metallic indium grey",
+              "code": "r7h",
+              "make_id": 10,
+              "option_group_id": 54,
+              "translation": {
+                "foreign_id": 4913,
+                "translation_en": "metallic indium grey",
+                "translationCurrent": "metallic indium grey"
+              }
+            }
+          }
+        },
+        "interior_code": {
+          "stream_group_id": 7,
+          "code": "interior_code",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Interior",
+            "translationCurrent": "Interior"
+          },
+          "stream_result": {
+            "93193": {
+              "id": 93193,
+              "description": "Deep black pearl effect (2T) Titan black",
+              "code": "jj",
+              "make_id": 10,
+              "option_group_id": 55,
+              "translation": {
+                "foreign_id": 93193,
+                "translation_en": "Deep black pearl effect (2T) Titan black",
+                "translationCurrent": "Deep black pearl effect (2T) Titan black"
+              }
+            }
+          }
+        },
+        "transmission_type": {
+          "stream_group_id": 7,
+          "code": "transmission_type",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Transmission",
+            "translationCurrent": "Transmission"
+          },
+          "stream_result": {
+            "113749": {
+              "id": 113749,
+              "description": "manual",
+              "code": "manual",
+              "make_id": 10,
+              "option_group_id": 51,
+              "translation": {
+                "foreign_id": 113749,
+                "translation_en": "manual",
+                "translationCurrent": "manual"
+              }
+            }
+          }
+        },
+        "options": {
+          "stream_group_id": 7,
+          "code": "options",
+          "data_type": 2,
+          "translation": {
+            "translation_en": "Options",
+            "translationCurrent": "Options"
+          },
+          "stream_result": {
+            "44800": {
+              "description": "Driving on the left",
+              "code": "pav0",
+              "translation": {
+                "translation_en": "Driving on the left",
+                "translationCurrent": "Driving on the left"
+              }
+            },
+            "44801": {
+              "description": "Type approval Great Britain and NorthernIreland",
+              "code": "pb09",
+              "translation": {
+                "translation_en": "Type approval Great Britain and NorthernIreland",
+                "translationCurrent": "Type approval Great Britain and NorthernIreland"
+              }
+            },
+            "44808": {
+              "description": "Luxury\r\n",
+              "code": "pa8d",
+              "translation": {
+                "translation_en": "Luxury\r\n",
+                "translationCurrent": "Luxury\r\n"
+              }
+            },
+            "44821": {
+              "description": "Component parts set, complying with vehicle type for Great Britain, various parts",
+              "code": "pb0n",
+              "translation": {
+                "translation_en": "Component parts set, complying with vehicle type for Great Britain, various parts",
+                "translationCurrent": "Component parts set, complying with vehicle type for Great Britain, various parts"
+              }
+            },
+            "44829": {
+              "description": "4-cylinder turbo diesel engine 2.0 l/135 kW (4V) TDI common rail base engine is TD1/TR1/T0N/T0P/T1I/T37",
+              "code": "pdk7",
+              "translation": {
+                "translation_en": "4-cylinder turbo diesel engine 2.0 l/135 kW (4V) TDI common rail base engine is TD1/TR1/T0N/T0P/T1I/T37",
+                "translationCurrent": "4-cylinder turbo diesel engine 2.0 l/135 kW (4V) TDI common rail base engine is TD1/TR1/T0N/T0P/T1I/T37"
+              }
+            },
+            "44859": {
+              "description": "Without online service",
+              "code": "pel0",
+              "translation": {
+                "translation_en": "Without online service",
+                "translationCurrent": "Without online service"
+              }
+            },
+            "44864": {
+              "description": "Electric. operated sliding door lh & rh plus power latching",
+              "code": "pgz6",
+              "translation": {
+                "translation_en": "Electric. operated sliding door lh & rh plus power latching",
+                "translationCurrent": "Electric. operated sliding door lh & rh plus power latching"
+              }
+            },
+            "44869": {
+              "description": "Alloy wheels 7.5J x 18",
+              "code": "pc0c",
+              "translation": {
+                "translation_en": "Alloy wheels 7.5J x 18",
+                "translationCurrent": "Alloy wheels 7.5J x 18"
+              }
+            },
+            "44872": {
+              "description": "6-speed manual transmission",
+              "code": "pg0k",
+              "translation": {
+                "translation_en": "6-speed manual transmission",
+                "translationCurrent": "6-speed manual transmission"
+              }
+            },
+            "44873": {
+              "description": "Rest Assist (drowsiness detection)",
+              "code": "pem1",
+              "translation": {
+                "translation_en": "Rest Assist (drowsiness detection)",
+                "translationCurrent": "Rest Assist (drowsiness detection)"
+              }
+            },
+            "44881": {
+              "description": "No special edition",
+              "code": "pe0a",
+              "translation": {
+                "translation_en": "No special edition",
+                "translationCurrent": "No special edition"
+              }
+            },
+            "44892": {
+              "description": "Without subsequent warranty",
+              "code": "pea0",
+              "translation": {
+                "translation_en": "Without subsequent warranty",
+                "translationCurrent": "Without subsequent warranty"
+              }
+            },
+            "44912": {
+              "description": "Front shock absorption",
+              "code": "pg03",
+              "translation": {
+                "translation_en": "Front shock absorption",
+                "translationCurrent": "Front shock absorption"
+              }
+            },
+            "44915": {
+              "description": "Tires 225/45 R18 95W xl (polymer coating) with modified profile",
+              "code": "pi73",
+              "translation": {
+                "translation_en": "Tires 225/45 R18 95W xl (polymer coating) with modified profile",
+                "translationCurrent": "Tires 225/45 R18 95W xl (polymer coating) with modified profile"
+              }
+            },
+            "44932": {
+              "description": "LED license plate lighting",
+              "code": "pkl1",
+              "translation": {
+                "translation_en": "LED license plate lighting",
+                "translationCurrent": "LED license plate lighting"
+              }
+            },
+            "44942": {
+              "description": "Customized installation",
+              "code": "pfc1",
+              "translation": {
+                "translation_en": "Customized installation",
+                "translationCurrent": "Customized installation"
+              }
+            },
+            "44944": {
+              "description": "MPV",
+              "code": "pk8p",
+              "translation": {
+                "translation_en": "MPV",
+                "translationCurrent": "MPV"
+              }
+            },
+            "44961": {
+              "description": "Right-hand drive vehicle",
+              "code": "pl0r",
+              "translation": {
+                "translation_en": "Right-hand drive vehicle",
+                "translationCurrent": "Right-hand drive vehicle"
+              }
+            },
+            "44962": {
+              "description": "Operating permit, alteration",
+              "code": "pc11",
+              "translation": {
+                "translation_en": "Operating permit, alteration",
+                "translationCurrent": "Operating permit, alteration"
+              }
+            },
+            "44965": {
+              "description": "7 seats",
+              "code": "pfs7",
+              "translation": {
+                "translation_en": "7 seats",
+                "translationCurrent": "7 seats"
+              }
+            },
+            "44970": {
+              "description": "No special purpose vehicle, standard equipment",
+              "code": "pf0a",
+              "translation": {
+                "translation_en": "No special purpose vehicle, standard equipment",
+                "translationCurrent": "No special purpose vehicle, standard equipment"
+              }
+            },
+            "44978": {
+              "description": "Without tray areas package/box",
+              "code": "pqe0",
+              "translation": {
+                "translation_en": "Without tray areas package/box",
+                "translationCurrent": "Without tray areas package/box"
+              }
+            },
+            "44989": {
+              "description": "Vehicles with special upgrade measures",
+              "code": "pgp1",
+              "translation": {
+                "translation_en": "Vehicles with special upgrade measures",
+                "translationCurrent": "Vehicles with special upgrade measures"
+              }
+            },
+            "44995": {
+              "description": "Service interval prolongation",
+              "code": "pqg1",
+              "translation": {
+                "translation_en": "Service interval prolongation",
+                "translationCurrent": "Service interval prolongation"
+              }
+            },
+            "44996": {
+              "description": "Battery 420 A (79 Ah)",
+              "code": "pj4e",
+              "translation": {
+                "translation_en": "Battery 420 A (79 Ah)",
+                "translationCurrent": "Battery 420 A (79 Ah)"
+              }
+            },
+            "44999": {
+              "description": "Without compass/traffic sign display/ traffic signs recognition",
+              "code": "pqr0",
+              "translation": {
+                "translation_en": "Without compass/traffic sign display/ traffic signs recognition",
+                "translationCurrent": "Without compass/traffic sign display/ traffic signs recognition"
+              }
+            },
+            "45017": {
+              "description": "Transit coating (type 1)",
+              "code": "pnt0",
+              "translation": {
+                "translation_en": "Transit coating (type 1)",
+                "translationCurrent": "Transit coating (type 1)"
+              }
+            },
+            "45018": {
+              "description": "With rear view camera system (type 2)",
+              "code": "pka2",
+              "translation": {
+                "translation_en": "With rear view camera system (type 2)",
+                "translationCurrent": "With rear view camera system (type 2)"
+              }
+            },
+            "45019": {
+              "description": "Suspension range 07 installation control only, no requirement forecast",
+              "code": "pl07",
+              "translation": {
+                "translation_en": "Suspension range 07 installation control only, no requirement forecast",
+                "translationCurrent": "Suspension range 07 installation control only, no requirement forecast"
+              }
+            },
+            "45021": {
+              "description": "Voice control",
+              "code": "pqh1",
+              "translation": {
+                "translation_en": "Voice control",
+                "translationCurrent": "Voice control"
+              }
+            },
+            "45022": {
+              "description": "Digital radio reception",
+              "code": "pqv3",
+              "translation": {
+                "translation_en": "Digital radio reception",
+                "translationCurrent": "Digital radio reception"
+              }
+            },
+            "45024": {
+              "description": "4-cylinder diesel engine 2.0 l unit 04L.D",
+              "code": "pt0n",
+              "translation": {
+                "translation_en": "4-cylinder diesel engine 2.0 l unit 04L.D",
+                "translationCurrent": "4-cylinder diesel engine 2.0 l unit 04L.D"
+              }
+            },
+            "45032": {
+              "description": "Standard battery/alternator capacity",
+              "code": "pny0",
+              "translation": {
+                "translation_en": "Standard battery/alternator capacity",
+                "translationCurrent": "Standard battery/alternator capacity"
+              }
+            },
+            "45071": {
+              "description": "Service indicator 30,000 km or 2 year ( variable )",
+              "code": "pqi6",
+              "translation": {
+                "translation_en": "Service indicator 30,000 km or 2 year ( variable )",
+                "translationCurrent": "Service indicator 30,000 km or 2 year ( variable )"
+              }
+            },
+            "45084": {
+              "description": "Alcantara/leather seat covering",
+              "code": "pn7k",
+              "translation": {
+                "translation_en": "Alcantara/leather seat covering",
+                "translationCurrent": "Alcantara/leather seat covering"
+              }
+            },
+            "45097": {
+              "description": "Chrome package (type 2)",
+              "code": "pqj3",
+              "translation": {
+                "translation_en": "Chrome package (type 2)",
+                "translationCurrent": "Chrome package (type 2)"
+              }
+            },
+            "45099": {
+              "description": "Labels/plates in English and French",
+              "code": "p0ss",
+              "translation": {
+                "translation_en": "Labels/plates in English and French",
+                "translationCurrent": "Labels/plates in English and French"
+              }
+            },
+            "45104": {
+              "description": "Front stabilizer",
+              "code": "p0ak",
+              "translation": {
+                "translation_en": "Front stabilizer",
+                "translationCurrent": "Front stabilizer"
+              }
+            },
+            "45105": {
+              "description": "Without camera without distance sensor (driver assistance system)",
+              "code": "pqk0",
+              "translation": {
+                "translation_en": "Without camera without distance sensor (driver assistance system)",
+                "translationCurrent": "Without camera without distance sensor (driver assistance system)"
+              }
+            },
+            "45113": {
+              "description": "Rear stabilizer",
+              "code": "p0bb",
+              "translation": {
+                "translation_en": "Rear stabilizer",
+                "translationCurrent": "Rear stabilizer"
+              }
+            },
+            "45115": {
+              "description": "Electric interface for external use AUX-IN and USB, MEDIA-IN jack Low Gen2",
+              "code": "puq0",
+              "translation": {
+                "translation_en": "Electric interface for external use AUX-IN and USB, MEDIA-IN jack Low Gen2",
+                "translationCurrent": "Electric interface for external use AUX-IN and USB, MEDIA-IN jack Low Gen2"
+              }
+            },
+            "45116": {
+              "description": "Two integrated child seats",
+              "code": "pqa6",
+              "translation": {
+                "translation_en": "Two integrated child seats",
+                "translationCurrent": "Two integrated child seats"
+              }
+            },
+            "45119": {
+              "description": "Without floor mats",
+              "code": "p0ta",
+              "translation": {
+                "translation_en": "Without floor mats",
+                "translationCurrent": "Without floor mats"
+              }
+            },
+            "45120": {
+              "description": "Without drawers under front seats",
+              "code": "pqn0",
+              "translation": {
+                "translation_en": "Without drawers under front seats",
+                "translationCurrent": "Without drawers under front seats"
+              }
+            },
+            "45139": {
+              "description": "Installation differentiation for transmission MQ500 vehicle components",
+              "code": "p0eu",
+              "translation": {
+                "translation_en": "Installation differentiation for transmission MQ500 vehicle components",
+                "translationCurrent": "Installation differentiation for transmission MQ500 vehicle components"
+              }
+            },
+            "45142": {
+              "description": "Nameplate set 'TDI'",
+              "code": "p1dg",
+              "translation": {
+                "translation_en": "Nameplate set 'TDI'",
+                "translationCurrent": "Nameplate set 'TDI'"
+              }
+            },
+            "45145": {
+              "description": "Disc brakes, front",
+              "code": "p1lw",
+              "translation": {
+                "translation_en": "Disc brakes, front",
+                "translationCurrent": "Disc brakes, front"
+              }
+            },
+            "45152": {
+              "description": "Instrument insert, mph speedometer Great Britain",
+              "code": "pu5b",
+              "translation": {
+                "translation_en": "Instrument insert, mph speedometer Great Britain",
+                "translationCurrent": "Instrument insert, mph speedometer Great Britain"
+              }
+            },
+            "45154": {
+              "description": "Without trailer hitch",
+              "code": "p1d0",
+              "translation": {
+                "translation_en": "Without trailer hitch",
+                "translationCurrent": "Without trailer hitch"
+              }
+            },
+            "45155": {
+              "description": "Standard manufacturing sequence",
+              "code": "p0fa",
+              "translation": {
+                "translation_en": "Standard manufacturing sequence",
+                "translationCurrent": "Standard manufacturing sequence"
+              }
+            },
+            "45169": {
+              "description": "Fuel system for diesel engine",
+              "code": "p0f5",
+              "translation": {
+                "translation_en": "Fuel system for diesel engine",
+                "translationCurrent": "Fuel system for diesel engine"
+              }
+            },
+            "45171": {
+              "description": "Covers for alloy wheels",
+              "code": "p1nl",
+              "translation": {
+                "translation_en": "Covers for alloy wheels",
+                "translationCurrent": "Covers for alloy wheels"
+              }
+            },
+            "45174": {
+              "description": "Information kit in English",
+              "code": "p0vf",
+              "translation": {
+                "translation_en": "Information kit in English",
+                "translationCurrent": "Information kit in English"
+              }
+            },
+            "45177": {
+              "description": "Without stickers and badges",
+              "code": "p0ka",
+              "translation": {
+                "translation_en": "Without stickers and badges",
+                "translationCurrent": "Without stickers and badges"
+              }
+            },
+            "45179": {
+              "description": "Speed-related variable steering assist (Servotronic)",
+              "code": "p1n3",
+              "translation": {
+                "translation_en": "Speed-related variable steering assist (Servotronic)",
+                "translationCurrent": "Speed-related variable steering assist (Servotronic)"
+              }
+            },
+            "45182": {
+              "description": "Differential lock (XDS) dynamic traction control",
+              "code": "p1y3",
+              "translation": {
+                "translation_en": "Differential lock (XDS) dynamic traction control",
+                "translationCurrent": "Differential lock (XDS) dynamic traction control"
+              }
+            },
+            "45187": {
+              "description": "Weight range 6 installation control only, no requirement forecast",
+              "code": "p0yf",
+              "translation": {
+                "translation_en": "Weight range 6 installation control only, no requirement forecast",
+                "translationCurrent": "Weight range 6 installation control only, no requirement forecast"
+              }
+            },
+            "45190": {
+              "description": "Initial standard fuel filling",
+              "code": "p1z0",
+              "translation": {
+                "translation_en": "Initial standard fuel filling",
+                "translationCurrent": "Initial standard fuel filling"
+              }
+            },
+            "45191": {
+              "description": "Without additional tires",
+              "code": "p2wa",
+              "translation": {
+                "translation_en": "Without additional tires",
+                "translationCurrent": "Without additional tires"
+              }
+            },
+            "45192": {
+              "description": "Special identification plate for EC for M1 passenger vehicle",
+              "code": "p1ex",
+              "translation": {
+                "translation_en": "Special identification plate for EC for M1 passenger vehicle",
+                "translationCurrent": "Special identification plate for EC for M1 passenger vehicle"
+              }
+            },
+            "45202": {
+              "description": "Wheel bolts with anti-theft protection (unlockable)",
+              "code": "p1pe",
+              "translation": {
+                "translation_en": "Wheel bolts with anti-theft protection (unlockable)",
+                "translationCurrent": "Wheel bolts with anti-theft protection (unlockable)"
+              }
+            },
+            "45205": {
+              "description": "Without delivery equipment",
+              "code": "p2a0",
+              "translation": {
+                "translation_en": "Without delivery equipment",
+                "translationCurrent": "Without delivery equipment"
+              }
+            },
+            "45209": {
+              "description": "Electric seat adjustment for both front seats, driver's seat with memory system",
+              "code": "p3l6",
+              "translation": {
+                "translation_en": "Electric seat adjustment for both front seats, driver's seat with memory system",
+                "translationCurrent": "Electric seat adjustment for both front seats, driver's seat with memory system"
+              }
+            },
+            "45211": {
+              "description": "Without mass damper for steering wheel",
+              "code": "p1q0",
+              "translation": {
+                "translation_en": "Without mass damper for steering wheel",
+                "translationCurrent": "Without mass damper for steering wheel"
+              }
+            },
+            "45217": {
+              "description": "Without partition",
+              "code": "p3ca",
+              "translation": {
+                "translation_en": "Without partition",
+                "translationCurrent": "Without partition"
+              }
+            },
+            "45219": {
+              "description": "Without special measures",
+              "code": "p3m0",
+              "translation": {
+                "translation_en": "Without special measures",
+                "translationCurrent": "Without special measures"
+              }
+            },
+            "45226": {
+              "description": "Without additional front underbody guard",
+              "code": "p1sa",
+              "translation": {
+                "translation_en": "Without additional front underbody guard",
+                "translationCurrent": "Without additional front underbody guard"
+              }
+            },
+            "45228": {
+              "description": "Without activated charcoal canister withSCR",
+              "code": "p1e9",
+              "translation": {
+                "translation_en": "Without activated charcoal canister withSCR",
+                "translationCurrent": "Without activated charcoal canister withSCR"
+              }
+            },
+            "45231": {
+              "description": "Standard climatic zones",
+              "code": "p0y1",
+              "translation": {
+                "translation_en": "Standard climatic zones",
+                "translationCurrent": "Standard climatic zones"
+              }
+            },
+            "45237": {
+              "description": "Without spare wheel",
+              "code": "p1g0",
+              "translation": {
+                "translation_en": "Without spare wheel",
+                "translationCurrent": "Without spare wheel"
+              }
+            },
+            "45240": {
+              "description": "Big roof system",
+              "code": "p3fu",
+              "translation": {
+                "translation_en": "Big roof system",
+                "translationCurrent": "Big roof system"
+              }
+            },
+            "45241": {
+              "description": "Without first aid kit and warning triangle",
+              "code": "p1t0",
+              "translation": {
+                "translation_en": "Without first aid kit and warning triangle",
+                "translationCurrent": "Without first aid kit and warning triangle"
+              }
+            },
+            "45244": {
+              "description": "Without 'drive select'",
+              "code": "p2h0",
+              "translation": {
+                "translation_en": "Without 'drive select'",
+                "translationCurrent": "Without 'drive select'"
+              }
+            },
+            "45251": {
+              "description": "Without backrest release for front seats",
+              "code": "p3h0",
+              "translation": {
+                "translation_en": "Without backrest release for front seats",
+                "translationCurrent": "Without backrest release for front seats"
+              }
+            },
+            "45257": {
+              "description": "Sports comfort seats front, right",
+              "code": "p3sg",
+              "translation": {
+                "translation_en": "Sports comfort seats front, right",
+                "translationCurrent": "Sports comfort seats front, right"
+              }
+            },
+            "45258": {
+              "description": "Trunk lid power closing",
+              "code": "p4e7",
+              "translation": {
+                "translation_en": "Trunk lid power closing",
+                "translationCurrent": "Trunk lid power closing"
+              }
+            },
+            "45260": {
+              "description": "Rear shock absorption for sports design",
+              "code": "p1jc",
+              "translation": {
+                "translation_en": "Rear shock absorption for sports design",
+                "translationCurrent": "Rear shock absorption for sports design"
+              }
+            },
+            "45262": {
+              "description": "Standard bumpers",
+              "code": "p2jb",
+              "translation": {
+                "translation_en": "Standard bumpers",
+                "translationCurrent": "Standard bumpers"
+              }
+            },
+            "45264": {
+              "description": "Central locking system 'Keyless Entry'",
+              "code": "p4f2",
+              "translation": {
+                "translation_en": "Central locking system 'Keyless Entry'",
+                "translationCurrent": "Central locking system 'Keyless Entry'"
+              }
+            },
+            "45271": {
+              "description": "SEAT marque-specific/class-specific features",
+              "code": "p0z4",
+              "translation": {
+                "translation_en": "SEAT marque-specific/class-specific features",
+                "translationCurrent": "SEAT marque-specific/class-specific features"
+              }
+            },
+            "45272": {
+              "description": "Folding table on front seat backrests",
+              "code": "p1u9",
+              "translation": {
+                "translation_en": "Folding table on front seat backrests",
+                "translationCurrent": "Folding table on front seat backrests"
+              }
+            },
+            "45273": {
+              "description": "Bright roof rails",
+              "code": "p3s1",
+              "translation": {
+                "translation_en": "Bright roof rails",
+                "translationCurrent": "Bright roof rails"
+              }
+            },
+            "45280": {
+              "description": "Windshield in heat-insulating glass",
+              "code": "p4gf",
+              "translation": {
+                "translation_en": "Windshield in heat-insulating glass",
+                "translationCurrent": "Windshield in heat-insulating glass"
+              }
+            },
+            "45285": {
+              "description": "Electronic stabilization program (ESP)",
+              "code": "p1at",
+              "translation": {
+                "translation_en": "Electronic stabilization program (ESP)",
+                "translationCurrent": "Electronic stabilization program (ESP)"
+              }
+            },
+            "45287": {
+              "description": "Front wheel drive",
+              "code": "p1x0",
+              "translation": {
+                "translation_en": "Front wheel drive",
+                "translationCurrent": "Front wheel drive"
+              }
+            },
+            "45289": {
+              "description": "Door and side trim panel in foam film, insert in leatherette",
+              "code": "p3lj",
+              "translation": {
+                "translation_en": "Door and side trim panel in foam film, insert in leatherette",
+                "translationCurrent": "Door and side trim panel in foam film, insert in leatherette"
+              }
+            },
+            "45291": {
+              "description": "Cup holder",
+              "code": "p4m6",
+              "translation": {
+                "translation_en": "Cup holder",
+                "translationCurrent": "Cup holder"
+              }
+            },
+            "45302": {
+              "description": "Sports comfort seats front, left",
+              "code": "p3tg",
+              "translation": {
+                "translation_en": "Sports comfort seats front, left",
+                "translationCurrent": "Sports comfort seats front, left"
+              }
+            },
+            "45303": {
+              "description": "Leather multi-function steering wheel",
+              "code": "p2pp",
+              "translation": {
+                "translation_en": "Leather multi-function steering wheel",
+                "translationCurrent": "Leather multi-function steering wheel"
+              }
+            },
+            "45304": {
+              "description": "Without surface protection, with additional transit coating",
+              "code": "p5k0",
+              "translation": {
+                "translation_en": "Without surface protection, with additional transit coating",
+                "translationCurrent": "Without surface protection, with additional transit coating"
+              }
+            },
+            "45305": {
+              "description": "Standard dashboard",
+              "code": "p4n2",
+              "translation": {
+                "translation_en": "Standard dashboard",
+                "translationCurrent": "Standard dashboard"
+              }
+            },
+            "45306": {
+              "description": "Without fire extinguisher",
+              "code": "p6a0",
+              "translation": {
+                "translation_en": "Without fire extinguisher",
+                "translationCurrent": "Without fire extinguisher"
+              }
+            },
+            "45307": {
+              "description": "Electrically operated child lock",
+              "code": "p4h5",
+              "translation": {
+                "translation_en": "Electrically operated child lock",
+                "translationCurrent": "Electrically operated child lock"
+              }
+            },
+            "45309": {
+              "description": "Interior light in footwell",
+              "code": "p6t1",
+              "translation": {
+                "translation_en": "Interior light in footwell",
+                "translationCurrent": "Interior light in footwell"
+              }
+            },
+            "45317": {
+              "description": "Without front license plate carrier",
+              "code": "p6w0",
+              "translation": {
+                "translation_en": "Without front license plate carrier",
+                "translationCurrent": "Without front license plate carrier"
+              }
+            },
+            "45318": {
+              "description": "Luggage compartment cover",
+              "code": "p3u4",
+              "translation": {
+                "translation_en": "Luggage compartment cover",
+                "translationCurrent": "Luggage compartment cover"
+              }
+            },
+            "45323": {
+              "description": "Vehicle class differentiation -710-",
+              "code": "p7km",
+              "translation": {
+                "translation_en": "Vehicle class differentiation -710-",
+                "translationCurrent": "Vehicle class differentiation -710-"
+              }
+            },
+            "45325": {
+              "description": "Acoustics package 'Standard'",
+              "code": "p3w4",
+              "translation": {
+                "translation_en": "Acoustics package 'Standard'",
+                "translationCurrent": "Acoustics package 'Standard'"
+              }
+            },
+            "45328": {
+              "description": "Front center armrest",
+              "code": "p6e1",
+              "translation": {
+                "translation_en": "Front center armrest",
+                "translationCurrent": "Front center armrest"
+              }
+            },
+            "45331": {
+              "description": "Tire pressure warning light",
+              "code": "p7k1",
+              "translation": {
+                "translation_en": "Tire pressure warning light",
+                "translationCurrent": "Tire pressure warning light"
+              }
+            },
+            "45335": {
+              "description": "Components without special surface appearance",
+              "code": "p6fa",
+              "translation": {
+                "translation_en": "Components without special surface appearance",
+                "translationCurrent": "Components without special surface appearance"
+              }
+            },
+            "45337": {
+              "description": "Roll-up sun screen",
+              "code": "p3y7",
+              "translation": {
+                "translation_en": "Roll-up sun screen",
+                "translationCurrent": "Roll-up sun screen"
+              }
+            },
+            "45339": {
+              "description": "Side windows in heat-insulating glass, from B-pillar and rear window dark tinted",
+              "code": "p4kf",
+              "translation": {
+                "translation_en": "Side windows in heat-insulating glass, from B-pillar and rear window dark tinted",
+                "translationCurrent": "Side windows in heat-insulating glass, from B-pillar and rear window dark tinted"
+              }
+            },
+            "45342": {
+              "description": "Driver's and front passenger air bag with knee air bag and front passenger air bag deactivation",
+              "code": "p4up",
+              "translation": {
+                "translation_en": "Driver's and front passenger air bag with knee air bag and front passenger air bag deactivation",
+                "translationCurrent": "Driver's and front passenger air bag with knee air bag and front passenger air bag deactivation"
+              }
+            },
+            "45350": {
+              "description": "Side air bag front with curtain air bag",
+              "code": "p4x3",
+              "translation": {
+                "translation_en": "Side air bag front with curtain air bag",
+                "translationCurrent": "Side air bag front with curtain air bag"
+              }
+            },
+            "45351": {
+              "description": "Radiator grille with chrome-plated strip",
+              "code": "p6kj",
+              "translation": {
+                "translation_en": "Radiator grille with chrome-plated strip",
+                "translationCurrent": "Radiator grille with chrome-plated strip"
+              }
+            },
+            "45352": {
+              "description": "Start/stop system with regenerative braking",
+              "code": "p7l6",
+              "translation": {
+                "translation_en": "Start/stop system with regenerative braking",
+                "translationCurrent": "Start/stop system with regenerative braking"
+              }
+            },
+            "45353": {
+              "description": "Seat heater for front seats separately controlled",
+              "code": "p4a3",
+              "translation": {
+                "translation_en": "Seat heater for front seats separately controlled",
+                "translationCurrent": "Seat heater for front seats separately controlled"
+              }
+            },
+            "45355": {
+              "description": "Exterior mirrors: with memory function, electrically foldable/adjustable, separately heated",
+              "code": "p6xq",
+              "translation": {
+                "translation_en": "Exterior mirrors: with memory function, electrically foldable/adjustable, separately heated",
+                "translationCurrent": "Exterior mirrors: with memory function, electrically foldable/adjustable, separately heated"
+              }
+            },
+            "45358": {
+              "description": "Decorative inserts",
+              "code": "p5my",
+              "translation": {
+                "translation_en": "Decorative inserts",
+                "translationCurrent": "Decorative inserts"
+              }
+            },
+            "45359": {
+              "description": "without Front Assist/without city automatic emergency braking",
+              "code": "p6k0",
+              "translation": {
+                "translation_en": "without Front Assist/without city automatic emergency braking",
+                "translationCurrent": "without Front Assist/without city automatic emergency braking"
+              }
+            },
+            "45361": {
+              "description": "Without entry grab handle",
+              "code": "p6x0",
+              "translation": {
+                "translation_en": "Without entry grab handle",
+                "translationCurrent": "Without entry grab handle"
+              }
+            },
+            "45362": {
+              "description": "Breakaway interior rear view mirror, automatically dimming",
+              "code": "p4l6",
+              "translation": {
+                "translation_en": "Breakaway interior rear view mirror, automatically dimming",
+                "translationCurrent": "Breakaway interior rear view mirror, automatically dimming"
+              }
+            },
+            "45370": {
+              "description": "Storage compartment",
+              "code": "p4y1",
+              "translation": {
+                "translation_en": "Storage compartment",
+                "translationCurrent": "Storage compartment"
+              }
+            },
+            "45373": {
+              "description": "Right exterior mirror: aspherical",
+              "code": "p5rv",
+              "translation": {
+                "translation_en": "Right exterior mirror: aspherical",
+                "translationCurrent": "Right exterior mirror: aspherical"
+              }
+            },
+            "45377": {
+              "description": "Bright moldings",
+              "code": "p4zb",
+              "translation": {
+                "translation_en": "Bright moldings",
+                "translationCurrent": "Bright moldings"
+              }
+            },
+            "45378": {
+              "description": "Anti-theft alarm syst.,pass.comp.contr.,backup horn and towing protection, w/o switch for interior monitoring",
+              "code": "p7ae",
+              "translation": {
+                "translation_en": "Anti-theft alarm syst.,pass.comp.contr.,backup horn and towing protection, w/o switch for interior monitoring",
+                "translationCurrent": "Anti-theft alarm syst.,pass.comp.contr.,backup horn and towing protection, w/o switch for interior monitoring"
+              }
+            },
+            "45379": {
+              "description": "Without lane change assistant",
+              "code": "p7y0",
+              "translation": {
+                "translation_en": "Without lane change assistant",
+                "translationCurrent": "Without lane change assistant"
+              }
+            },
+            "45380": {
+              "description": "Left exterior mirror: convex",
+              "code": "p5sj",
+              "translation": {
+                "translation_en": "Left exterior mirror: convex",
+                "translationCurrent": "Left exterior mirror: convex"
+              }
+            },
+            "45383": {
+              "description": "Emission standard EU6 plus",
+              "code": "p7mm",
+              "translation": {
+                "translation_en": "Emission standard EU6 plus",
+                "translationCurrent": "Emission standard EU6 plus"
+              }
+            },
+            "45388": {
+              "description": "Without C-rails",
+              "code": "p6l0",
+              "translation": {
+                "translation_en": "Without C-rails",
+                "translationCurrent": "Without C-rails"
+              }
+            },
+            "45389": {
+              "description": "Electrically adjustable lumbar support in front seat backrests and massage feature right",
+              "code": "p8i1",
+              "translation": {
+                "translation_en": "Electrically adjustable lumbar support in front seat backrests and massage feature right",
+                "translationCurrent": "Electrically adjustable lumbar support in front seat backrests and massage feature right"
+              }
+            },
+            "45391": {
+              "description": "SD card (Europe)",
+              "code": "p7re",
+              "translation": {
+                "translation_en": "SD card (Europe)",
+                "translationCurrent": "SD card (Europe)"
+              }
+            },
+            "45397": {
+              "description": "Carrier frequency 433.92 MHz-434.42 Mhz",
+              "code": "p5d1",
+              "translation": {
+                "translation_en": "Carrier frequency 433.92 MHz-434.42 Mhz",
+                "translationCurrent": "Carrier frequency 433.92 MHz-434.42 Mhz"
+              }
+            },
+            "45404": {
+              "description": "Without tie down straps/net/pocket",
+              "code": "p6m0",
+              "translation": {
+                "translation_en": "Without tie down straps/net/pocket",
+                "translationCurrent": "Without tie down straps/net/pocket"
+              }
+            },
+            "45413": {
+              "description": "3 separate seats (first row of seats) second rear seat bench (second row of seats)",
+              "code": "p5kt",
+              "translation": {
+                "translation_en": "3 separate seats (first row of seats) second rear seat bench (second row of seats)",
+                "translationCurrent": "3 separate seats (first row of seats) second rear seat bench (second row of seats)"
+              }
+            },
+            "45415": {
+              "description": "Separate daytime running lights with low beam assistant and 'Coming Home' feature",
+              "code": "p8k3",
+              "translation": {
+                "translation_en": "Separate daytime running lights with low beam assistant and 'Coming Home' feature",
+                "translationCurrent": "Separate daytime running lights with low beam assistant and 'Coming Home' feature"
+              }
+            },
+            "45416": {
+              "description": "Without protective film for scuff plate",
+              "code": "p7m5",
+              "translation": {
+                "translation_en": "Without protective film for scuff plate",
+                "translationCurrent": "Without protective film for scuff plate"
+              }
+            },
+            "45417": {
+              "description": "Sun visors with mirror, illuminated, airbag label on sun visor",
+              "code": "p5xi",
+              "translation": {
+                "translation_en": "Sun visors with mirror, illuminated, airbag label on sun visor",
+                "translationCurrent": "Sun visors with mirror, illuminated, airbag label on sun visor"
+              }
+            },
+            "45419": {
+              "description": "Rear license plate carrier (ECE)",
+              "code": "p6p1",
+              "translation": {
+                "translation_en": "Rear license plate carrier (ECE)",
+                "translationCurrent": "Rear license plate carrier (ECE)"
+              }
+            },
+            "45426": {
+              "description": "Tray on roof liner",
+              "code": "p7n1",
+              "translation": {
+                "translation_en": "Tray on roof liner",
+                "translationCurrent": "Tray on roof liner"
+              }
+            },
+            "45433": {
+              "description": "Windshield wiper intermittent control with rain sensor",
+              "code": "p8n3",
+              "translation": {
+                "translation_en": "Windshield wiper intermittent control with rain sensor",
+                "translationCurrent": "Windshield wiper intermittent control with rain sensor"
+              }
+            },
+            "45439": {
+              "description": "W/o heat accumulator/auxiliary heating",
+              "code": "p7e0",
+              "translation": {
+                "translation_en": "W/o heat accumulator/auxiliary heating",
+                "translationCurrent": "W/o heat accumulator/auxiliary heating"
+              }
+            },
+            "45441": {
+              "description": "Navigation system MIB2 Standard PQ (EU/ROW)",
+              "code": "p7up",
+              "translation": {
+                "translation_en": "Navigation system MIB2 Standard PQ (EU/ROW)",
+                "translationCurrent": "Navigation system MIB2 Standard PQ (EU/ROW)"
+              }
+            },
+            "45442": {
+              "description": "Leather gearshift knob/handle",
+              "code": "p6q2",
+              "translation": {
+                "translation_en": "Leather gearshift knob/handle",
+                "translationCurrent": "Leather gearshift knob/handle"
+              }
+            },
+            "45445": {
+              "description": "Cruise control system (CCS) electronic",
+              "code": "p8t2",
+              "translation": {
+                "translation_en": "Cruise control system (CCS) electronic",
+                "translationCurrent": "Cruise control system (CCS) electronic"
+              }
+            },
+            "45453": {
+              "description": "Key for locking system with remote control",
+              "code": "p8qe",
+              "translation": {
+                "translation_en": "Key for locking system with remote control",
+                "translationCurrent": "Key for locking system with remote control"
+              }
+            },
+            "45455": {
+              "description": "Headrests for front seats (x-adjustment)",
+              "code": "p5zc",
+              "translation": {
+                "translation_en": "Headrests for front seats (x-adjustment)",
+                "translationCurrent": "Headrests for front seats (x-adjustment)"
+              }
+            },
+            "45457": {
+              "description": "Park distance control, front and rear",
+              "code": "p7x2",
+              "translation": {
+                "translation_en": "Park distance control, front and rear",
+                "translationCurrent": "Park distance control, front and rear"
+              }
+            },
+            "45458": {
+              "description": "Radio/navigation system",
+              "code": "p8ay",
+              "translation": {
+                "translation_en": "Radio/navigation system",
+                "translationCurrent": "Radio/navigation system"
+              }
+            },
+            "45460": {
+              "description": "Headlight-range adjustment",
+              "code": "p8q1",
+              "translation": {
+                "translation_en": "Headlight-range adjustment",
+                "translationCurrent": "Headlight-range adjustment"
+              }
+            },
+            "45464": {
+              "description": "Climatronic with impact pressure controlfree of cfc with controls in the rear",
+              "code": "p9au",
+              "translation": {
+                "translation_en": "Climatronic with impact pressure controlfree of cfc with controls in the rear",
+                "translationCurrent": "Climatronic with impact pressure controlfree of cfc with controls in the rear"
+              }
+            },
+            "45468": {
+              "description": "Without 'Multimedia' in vehicle",
+              "code": "p9wc",
+              "translation": {
+                "translation_en": "Without 'Multimedia' in vehicle",
+                "translationCurrent": "Without 'Multimedia' in vehicle"
+              }
+            },
+            "45476": {
+              "description": "Alternator 180 A",
+              "code": "p8gv",
+              "translation": {
+                "translation_en": "Alternator 180 A",
+                "translationCurrent": "Alternator 180 A"
+              }
+            },
+            "45484": {
+              "description": "8 speakers (passive)",
+              "code": "p8rm",
+              "translation": {
+                "translation_en": "8 speakers (passive)",
+                "translationCurrent": "8 speakers (passive)"
+              }
+            },
+            "45487": {
+              "description": "High beam assistant",
+              "code": "p8g1",
+              "translation": {
+                "translation_en": "High beam assistant",
+                "translationCurrent": "High beam assistant"
+              }
+            },
+            "45488": {
+              "description": "Non-smoking package",
+              "code": "p9ja",
+              "translation": {
+                "translation_en": "Non-smoking package",
+                "translationCurrent": "Non-smoking package"
+              }
+            },
+            "45490": {
+              "description": "Taillight assemblies, standard design",
+              "code": "p8sa",
+              "translation": {
+                "translation_en": "Taillight assemblies, standard design",
+                "translationCurrent": "Taillight assemblies, standard design"
+              }
+            },
+            "45491": {
+              "description": "Front fog lamp and cornering lamp",
+              "code": "p8wh",
+              "translation": {
+                "translation_en": "Front fog lamp and cornering lamp",
+                "translationCurrent": "Front fog lamp and cornering lamp"
+              }
+            },
+            "45493": {
+              "description": "Halogen twin headlights",
+              "code": "p8id",
+              "translation": {
+                "translation_en": "Halogen twin headlights",
+                "translationCurrent": "Halogen twin headlights"
+              }
+            },
+            "45499": {
+              "description": "Two reading lights front",
+              "code": "p8s7",
+              "translation": {
+                "translation_en": "Two reading lights front",
+                "translationCurrent": "Two reading lights front"
+              }
+            },
+            "45501": {
+              "description": "Headlight washer system",
+              "code": "p8x1",
+              "translation": {
+                "translation_en": "Headlight washer system",
+                "translationCurrent": "Headlight washer system"
+              }
+            },
+            "45502": {
+              "description": "Auxiliary heater",
+              "code": "p9m5",
+              "translation": {
+                "translation_en": "Auxiliary heater",
+                "translationCurrent": "Auxiliary heater"
+              }
+            },
+            "45505": {
+              "description": "Two-tone horn",
+              "code": "p8y1",
+              "translation": {
+                "translation_en": "Two-tone horn",
+                "translationCurrent": "Two-tone horn"
+              }
+            },
+            "45508": {
+              "description": "Rear fog light for driving on the left",
+              "code": "p8td",
+              "translation": {
+                "translation_en": "Rear fog light for driving on the left",
+                "translationCurrent": "Rear fog light for driving on the left"
+              }
+            },
+            "45514": {
+              "description": "Seat belt reminder",
+              "code": "p9p8",
+              "translation": {
+                "translation_en": "Seat belt reminder",
+                "translationCurrent": "Seat belt reminder"
+              }
+            },
+            "45515": {
+              "description": "Antenna for AM/FM reception, 'diversity'",
+              "code": "p8zh",
+              "translation": {
+                "translation_en": "Antenna for AM/FM reception, 'diversity'",
+                "translationCurrent": "Antenna for AM/FM reception, 'diversity'"
+              }
+            },
+            "45523": {
+              "description": "Multi-function display/on-board computerwith check control",
+              "code": "p9q4",
+              "translation": {
+                "translation_en": "Multi-function display/on-board computerwith check control",
+                "translationCurrent": "Multi-function display/on-board computerwith check control"
+              }
+            },
+            "45525": {
+              "description": "Not hot country",
+              "code": "p8z5",
+              "translation": {
+                "translation_en": "Not hot country",
+                "translationCurrent": "Not hot country"
+              }
+            },
+            "45527": {
+              "description": "Mobile phone preparation",
+              "code": "p9zx",
+              "translation": {
+                "translation_en": "Mobile phone preparation",
+                "translationCurrent": "Mobile phone preparation"
+              }
+            },
+            "45532": {
+              "description": "Additional reflectors (door area)",
+              "code": "p9tc",
+              "translation": {
+                "translation_en": "Additional reflectors (door area)",
+                "translationCurrent": "Additional reflectors (door area)"
+              }
+            },
+            "45533": {
+              "description": "Operating voltage 12 V plus 230 inverter",
+              "code": "p9z3",
+              "translation": {
+                "translation_en": "Operating voltage 12 V plus 230 inverter",
+                "translationCurrent": "Operating voltage 12 V plus 230 inverter"
+              }
+            },
+            "45535": {
+              "description": "Heated washer nozzles, front",
+              "code": "p9t1",
+              "translation": {
+                "translation_en": "Heated washer nozzles, front",
+                "translationCurrent": "Heated washer nozzles, front"
+              }
+            },
+            "123915": {
+              "description": "'Pescara' - 4 alloy wheels 6.5J x 16 -\ntires 205/55 R16",
+              "code": "ppj8",
+              "translation": {
+                "translation_en": "'Pescara' - 4 alloy wheels 6.5J x 16 -\ntires 205/55 R16",
+                "translationCurrent": "'Pescara' - 4 alloy wheels 6.5J x 16 -\ntires 205/55 R16"
+              }
+            },
+            "123916": {
+              "description": "leather trim for Golf V6 with additional\n RECARO sports seats",
+              "code": "ppl9",
+              "translation": {
+                "translation_en": "leather trim for Golf V6 with additional\n RECARO sports seats",
+                "translationCurrent": "leather trim for Golf V6 with additional\n RECARO sports seats"
+              }
+            },
+            "123917": {
+              "description": "S line exterior package",
+              "code": "ppqc",
+              "translation": {
+                "translation_en": "S line exterior package",
+                "translationCurrent": "S line exterior package"
+              }
+            },
+            "123918": {
+              "description": "2 child seats",
+              "code": "pw5n",
+              "translation": {
+                "translation_en": "2 child seats",
+                "translationCurrent": "2 child seats"
+              }
+            }
+          }
+        },
+        "transmission_code": {
+          "stream_group_id": 7,
+          "code": "transmission_code",
+          "data_type": 3,
+          "translation": {
+            "translation_en": "Transmission code",
+            "translationCurrent": "Transmission code"
+          },
+          "stream_result": {
+            "123920": {
+              "id": 123920,
+              "description": "PFQ",
+              "code": "pfq",
+              "make_id": 10,
+              "option_group_id": 60,
+              "translation": {
+                "foreign_id": 123920,
+                "translation_en": "PFQ",
+                "translationCurrent": "PFQ"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

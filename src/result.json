@@ -1,0 +1,255 @@
+{
+  "make": {
+    "id": 200005143,
+    "name": "Ford",
+    "niceName": "ford"
+  },
+  "model": {
+    "id": "Ford_F_150",
+    "name": "F-150",
+    "niceName": "f-150"
+  },
+  "engine": {
+    "name": "Engine",
+    "equipmentType": "ENGINE",
+    "availability": "STANDARD",
+    "compressionRatio": 10.5,
+    "cylinder": 8,
+    "size": 5,
+    "displacement": 4951,
+    "configuration": "V",
+    "fuelType": "flex-fuel (unleaded/E85)",
+    "horsepower": 360,
+    "torque": 380,
+    "totalValves": 32,
+    "manufacturerEngineCode": "99F",
+    "type": "flex-fuel (FFV)",
+    "code": "8VNAF5.0",
+    "compressorType": "NA",
+    "rpm": {
+      "horsepower": 5500,
+      "torque": 4250
+    },
+    "valve": {
+      "timing": "variable valve timing",
+      "gear": "double overhead camshaft"
+    }
+  },
+  "transmission": {
+    "name": "6A",
+    "equipmentType": "TRANSMISSION",
+    "availability": "STANDARD",
+    "transmissionType": "AUTOMATIC",
+    "numberOfSpeeds": "6"
+  },
+  "drivenWheels": "four wheel drive",
+  "numOfDoors": "4",
+  "options": [
+    {
+      "category": "Exterior",
+      "options": [
+        {
+          "id": "200399154",
+          "name": "Spray-In Bedliner",
+          "equipmentType": "OPTION",
+          "availability": "All"
+        },
+        {
+          "id": "200399112",
+          "name": "Tailgate Step",
+          "equipmentType": "OPTION",
+          "availability": "All"
+        },
+        {
+          "id": "200399016",
+          "name": "License Plate Bracket",
+          "description": "Front license plate bracket; Standard in states where required by law",
+          "equipmentType": "OPTION",
+          "availability": "All except Harley-Davidson"
+        }
+      ]
+    },
+    {
+      "category": "Mechanical",
+      "options": [
+        {
+          "id": "200399193",
+          "name": "3.55 E-Lock Electronic Locking Rear Axle Ratio",
+          "equipmentType": "OPTION",
+          "availability": "All exc SVT Raptor & Harley-Davidson"
+        },
+        {
+          "id": "200399198",
+          "name": "3.5L V6 EcoBoost Engine",
+          "description": "3.5L V6 EcoBoost engine with twin turbos, direct injection, DOHC, 24-valves, variable valve timing, 365 hp @ 5,000 rpm and 420 lb-ft of torque @ 2,500 rpm; 36 gallon fuel tank",
+          "equipmentType": "OPTION",
+          "availability": "XL Reg LB 4WD/XL SuperCab 4WD/XL SuperCrew 4WD/XLT 4WD/FX4/Lariat 4WD/King Ranch 4WD/Platinum 4WD"
+        }
+      ]
+    },
+    {
+      "category": "Additional Fees",
+      "options": [
+        {
+          "id": "200399149",
+          "name": "Non-California Emissions/Non-Cross-Border States Dealer Order For California States Registration",
+          "description": "It is a violation of federal law for a Federal-State dealer to sell a vehicle with code 422 (California-Emissions System), unless the vehicle will be registered in a California-Emissions or Cross-Border State; Federal dealers ordering vehicles with code 422 are required to also use code 93N to attest that the vehicle is being sold/delivered to a customer intending to register the vehicle in a California-Emissions or Cross-Border State",
+          "equipmentType": "OPTION",
+          "availability": "All"
+        },
+        {
+          "id": "200399030",
+          "name": "California Emissions System",
+          "description": "Required on units with GVWR of 8,500 lbs. or less for California, Connecticut, Massachusetts, Maryland, Maine, New Jersey, New York, Oregon, Pennsylvania, Rhode Island, Vermont and Washington registration; Optional for Cross-Border States: Arizona, Delaware, Idaho, Nevada, New Hampshire, New Mexico, Ohio, Utah, Virginia and West Virginia",
+          "equipmentType": "OPTION",
+          "availability": "All"
+        },
+        {
+          "id": "200399031",
+          "name": "California Emissions System Not Required",
+          "description": "Control code for units either shipped to California-Emissions States dealers or ordered by California-Emissions States dealers for registration in non-California States locations; In Maine, Rhode Island and Vermont, dealers cannot order vehicles for customers in non-California Emission State locations (except 936 - State Public Service/Emergency Vehicles)",
+          "equipmentType": "OPTION",
+          "availability": "All"
+        },
+        {
+          "id": "200399148",
+          "name": "California Emission Exemption For Public Service/Emergency Vehicles (Fleet)",
+          "description": "This exemption may only apply in certain states; Ordering dealer is responsible for contacting the proper state authorities for clarification on qualifying exempted vehicles for registration; Only available on units sold for authorized public service or emergency service use; Must also use Code 423 when ordering",
+          "equipmentType": "OPTION",
+          "availability": "All"
+        },
+        {
+          "id": "200399032",
+          "name": "50 State Emissions (Fleet)",
+          "description": "Available on all engines to Commercial and Government Fleet only. Standard on F-150 6.2L Engine (including Raptor).",
+          "equipmentType": "OPTION",
+          "availability": "All"
+        }
+      ]
+    }
+  ],
+  "colors": [],
+  "categories": {
+    "primaryBodyType": "Truck",
+    "market": "Flex Fuel",
+    "manufacturerCabType": "SuperCrew",
+    "epaClass": "Standard Pickup Trucks",
+    "vehicleSize": "Large",
+    "vehicleType": "Truck",
+    "vehicleStyle": "Crew Cab Pickup"
+  },
+  "squishVin": "1FTFW1ETCF",
+  "years": [
+    {
+      "id": 100538129,
+      "year": 2012,
+      "styles": [
+        {
+          "id": 101412250,
+          "name": "FX4 4dr SuperCrew 4WD Styleside 6.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "FX4"
+        },
+        {
+          "id": 101412249,
+          "name": "FX4 4dr SuperCrew 4WD Styleside 5.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "FX4"
+        },
+        {
+          "id": 101412254,
+          "name": "Lariat 4dr SuperCrew 4WD Styleside 6.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "Lariat"
+        },
+        {
+          "id": 101412253,
+          "name": "Lariat 4dr SuperCrew 4WD Styleside 5.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "Lariat"
+        },
+        {
+          "id": 101412246,
+          "name": "XLT 4dr SuperCrew 4WD Styleside 6.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "XLT"
+        },
+        {
+          "id": 101412245,
+          "name": "XLT 4dr SuperCrew 4WD Styleside 5.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "XLT"
+        },
+        {
+          "id": 101412258,
+          "name": "King Ranch 4dr SuperCrew 4WD Styleside 6.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "King Ranch"
+        },
+        {
+          "id": 101412257,
+          "name": "King Ranch 4dr SuperCrew 4WD Styleside 5.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "King Ranch"
+        },
+        {
+          "id": 101412262,
+          "name": "Platinum 4dr SuperCrew 4WD Styleside 6.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "Platinum"
+        },
+        {
+          "id": 101412261,
+          "name": "Platinum 4dr SuperCrew 4WD Styleside 5.5 ft. SB (5.0L 8cyl 6A)",
+          "submodel": {
+            "body": "SuperCrew",
+            "modelName": "F-150 SuperCrew",
+            "niceName": "supercrew"
+          },
+          "trim": "Platinum"
+        }
+      ]
+    }
+  ],
+  "matchingType": "SQUISHVIN",
+  "mpg": {
+    "highway": "19",
+    "city": "14"
+  }
+}
