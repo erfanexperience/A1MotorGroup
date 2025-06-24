@@ -402,6 +402,14 @@ app.delete('/api/vehicles', async (req, res) => {
 // Serve static files
 app.use('/api/images', express.static(path.join(__dirname, '../../Cars')));
 
+// Serve static files from the React app build
+app.use(express.static(path.join(__dirname, '../../build')));
+
+// Catch-all: send back React's index.html for any non-API route
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../../build', 'index.html'));
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
   console.log(`CORS enabled for http://localhost:3001`);
