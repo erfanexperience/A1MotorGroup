@@ -175,6 +175,7 @@ const Home = () => {
                               ${Number(car.pricing.price).toLocaleString()}
                             </span>
                             <span style={{ color: '#2196F3', fontWeight: 700, fontSize: '1.15em' }}>
+                              ${Number(car.pricing.salesPrice).toLocaleString()}
                             </span>
                           </>
                         ) : car.pricing && car.pricing.price ? (
