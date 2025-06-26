@@ -30,7 +30,8 @@
     "dev": "concurrently \"npm run start\" \"npm run server\"",
     "migrate": "node src/server/migrate.js",
     "backup": "node backup-database.js",
-    "server-only": "node src/server/index.js"
+    "server-only": "node src/server/index.js",
+    "start:prod": "npm run build && npm run server-only"
   },
   "eslintConfig": {
     "extends": [
