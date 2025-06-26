@@ -3,11 +3,15 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs').promises;
 const cors = require('cors');
+const Database = require('./database');
 
 const app = express();
 const port = process.env.PORT || 5001;
 
-// Initialize Cars directory
+// Initialize database
+const db = new Database();
+
+// Initialize Cars directory for images
 const initCarsDirectory = async () => {
   const carsDir = path.join(__dirname, '../../Cars');
   try {
@@ -20,8 +24,19 @@ const initCarsDirectory = async () => {
   }
 };
 
-// Initialize on startup
-initCarsDirectory().catch(console.error);
+// Initialize database and directories on startup
+const initializeApp = async () => {
+  try {
+    await db.init();
+    await initCarsDirectory();
+    console.log('App initialized successfully');
+  } catch (error) {
+    console.error('Error initializing app:', error);
+    process.exit(1);
+  }
+};
+
+initializeApp();
 
 // Configure CORS
 app.use(cors({
@@ -99,59 +114,42 @@ const handleMulterError = (err, req, res, next) => {
 // Check if vehicle exists
 app.get('/api/vehicles/:vin', async (req, res) => {
   try {
-    const carsDir = path.join(__dirname, '../../Cars');
-    const folders = await fs.readdir(carsDir);
-    const exists = folders.some(folder => folder.startsWith(req.params.vin));
-    
+    const exists = await db.vehicleExists(req.params.vin);
     if (exists) {
       res.status(200).json({ exists: true });
     } else {
       res.status(404).json({ exists: false });
     }
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      res.status(404).json({ exists: false });
-    } else {
-      res.status(500).json({ error: error.message });
-    }
+    console.error('Error checking vehicle existence:', error);
+    res.status(500).json({ error: error.message });
   }
 });
 
 // Get all vehicles
 app.get('/api/vehicles', async (req, res) => {
   try {
-    const carsDir = path.join(__dirname, '../../Cars');
-    const folders = await fs.readdir(carsDir);
+    const vehicles = await db.getAllVehicles();
     
-    const vehicles = await Promise.all(
-      folders.map(async (folder) => {
-        try {
-          const vehiclePath = path.join(carsDir, folder);
-          const dataFile = path.join(vehiclePath, 'data.json');
-          const imagesDir = path.join(vehiclePath, 'images');
-          
-          const data = JSON.parse(await fs.readFile(dataFile, 'utf-8'));
-          const images = await fs.readdir(imagesDir);
-          
-          return {
-            ...data,
-            mainImage: images.length > 0 ? `/api/images/${folder}/images/${images[0]}` : null,
-            images: images.map(image => `/api/images/${folder}/images/${image}`)
-          };
-        } catch (error) {
-          console.error(`Error processing vehicle folder ${folder}:`, error);
-          return null;
-        }
-      })
-    );
+    // Add image URLs to vehicles
+    const vehiclesWithImages = vehicles.map(vehicle => {
+      const folderName = `${vehicle.vin}-${vehicle.make}-${vehicle.model}`;
+      return {
+        ...vehicle,
+        mainImage: vehicle.images && vehicle.images.length > 0 
+          ? `/api/images/${folderName}/images/${vehicle.images[0].filename}` 
+          : null,
+        images: vehicle.images ? vehicle.images.map(img => ({
+          ...img,
+          path: `/api/images/${folderName}/images/${img.filename}`
+        })) : []
+      };
+    });
     
-    res.json(vehicles.filter(v => v !== null));
+    res.json(vehiclesWithImages);
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      res.json([]);
-    } else {
-      res.status(500).json({ error: error.message });
-    }
+    console.error('Error getting vehicles:', error);
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -165,6 +163,13 @@ app.post('/api/vehicles', upload.any(), async (req, res) => {
     if (!vehicleData.vin || !vehicleData.make || !vehicleData.model) {
       return res.status(400).json({ error: 'Missing required vehicle information' });
     }
+
+    // Check if vehicle already exists
+    const exists = await db.vehicleExists(vehicleData.vin);
+    if (exists) {
+      return res.status(400).json({ error: 'Vehicle with this VIN already exists' });
+    }
+
     const folderName = `${vehicleData.vin}-${vehicleData.make}-${vehicleData.model}`;
     const folderPath = path.join(__dirname, '../../Cars', folderName);
     const imagesDir = path.join(folderPath, 'images');
@@ -226,14 +231,11 @@ app.post('/api/vehicles', upload.any(), async (req, res) => {
     if (carfaxPath) vehicleData.certificates.carfax = carfaxPath;
     if (windowStickerPath) vehicleData.certificates.windowSticker = windowStickerPath;
     
-    // Save vehicle data
-    await fs.writeFile(
-      path.join(folderPath, 'data.json'),
-      JSON.stringify(vehicleData, null, 2)
-    );
+    // Save vehicle to database
+    const savedVehicle = await db.addVehicle(vehicleData);
     res.status(201).json({ 
       message: 'Vehicle added successfully',
-      vehicle: vehicleData
+      vehicle: savedVehicle
     });
   } catch (error) {
     console.error('Error saving vehicle:', error);
@@ -353,11 +355,8 @@ app.put('/api/vehicles', upload.any(), async (req, res) => {
     // Remove deletedImages from the data before saving
     delete vehicleData.deletedImages;
     
-    // Save updated vehicle data
-    const dataFilePath = path.join(folderPath, 'data.json');
-    console.log('Saving updated vehicle data to:', dataFilePath);
-    await fs.writeFile(dataFilePath, JSON.stringify(vehicleData, null, 2));
-    
+    // Update vehicle in database
+    const result = await db.updateVehicle(vehicleData);
     console.log('Vehicle updated successfully');
     res.status(200).json({ 
       message: 'Vehicle updated successfully',
@@ -372,17 +371,23 @@ app.put('/api/vehicles', upload.any(), async (req, res) => {
 // Delete vehicle
 app.delete('/api/vehicles/:vin', async (req, res) => {
   try {
-    const carsDir = path.join(__dirname, '../../Cars');
-    const folders = await fs.readdir(carsDir);
-    const folder = folders.find(f => f.startsWith(req.params.vin));
-    
-    if (folder) {
-      await fs.rm(path.join(carsDir, folder), { recursive: true });
+    const result = await db.deleteVehicle(req.params.vin);
+    if (result.changes > 0) {
+      // Also delete the folder and files
+      const carsDir = path.join(__dirname, '../../Cars');
+      const folders = await fs.readdir(carsDir);
+      const folder = folders.find(f => f.startsWith(req.params.vin));
+      
+      if (folder) {
+        await fs.rm(path.join(carsDir, folder), { recursive: true });
+      }
+      
       res.json({ message: 'Vehicle deleted successfully' });
     } else {
       res.status(404).json({ error: 'Vehicle not found' });
     }
   } catch (error) {
+    console.error('Error deleting vehicle:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -390,11 +395,14 @@ app.delete('/api/vehicles/:vin', async (req, res) => {
 // Delete all vehicles
 app.delete('/api/vehicles', async (req, res) => {
   try {
+    const result = await db.deleteAllVehicles();
+    // Also delete all folders
     const carsDir = path.join(__dirname, '../../Cars');
     await fs.rm(carsDir, { recursive: true, force: true });
     await fs.mkdir(carsDir);
     res.json({ message: 'All vehicles deleted successfully' });
   } catch (error) {
+    console.error('Error deleting all vehicles:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -408,6 +416,19 @@ app.use(express.static(path.join(__dirname, '../../build')));
 // Catch-all: send back React's index.html for any non-API route
 app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../../build', 'index.html'));
+});
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  console.log('Shutting down gracefully...');
+  await db.close();
+  process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+  console.log('Shutting down gracefully...');
+  await db.close();
+  process.exit(0);
 });
 
 app.listen(port, () => {
