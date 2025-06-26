@@ -2,11 +2,21 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaFilter } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
+}
+
+function useIsMobile(breakpoint = 900) {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= breakpoint);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= breakpoint);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [breakpoint]);
+  return isMobile;
 }
 
 const Inventory = () => {
@@ -24,12 +34,16 @@ const Inventory = () => {
   const [models, setModels] = useState([]);
   const [years, setYears] = useState([]);
   const [imageIndexes, setImageIndexes] = useState({});
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const navigate = useNavigate();
+  const isMobile = useIsMobile(900);
 
   useEffect(() => {
     const fetchCars = async () => {
       const res = await fetch('/api/vehicles');
-      const data = await res.json();
+      let data = await res.json();
+      // Sort by upload time (descending)
+      data = data.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
       setCars(data);
       setFiltered(data);
       setMakes([...new Set(data.map(car => car.make).filter(Boolean))]);
@@ -69,6 +83,106 @@ const Inventory = () => {
       [vin]: idx[vin] === ((filtered.find(car => car.vin === vin)?.images?.length || 1) - 1) ? 0 : idx[vin] + 1
     }));
   };
+
+  // --- MOBILE LAYOUT ---
+  if (isMobile) {
+    return (
+      <>
+        <Header />
+        <MobileInventoryOuter>
+          <MobileFilterCard>
+            <MobileFilterHeader onClick={() => setMobileFiltersOpen(open => !open)}>
+              <span style={{ fontWeight: 700, fontSize: '1.15rem' }}>Filters</span>
+              <FaFilter style={{ marginLeft: 8 }} />
+            </MobileFilterHeader>
+            {mobileFiltersOpen && (
+              <MobileFilterContent>
+                <MobileFilterRow>
+                  <MobileFilterField>
+                    <label>Make</label>
+                    <select name="make" value={filters.make} onChange={handleFilterChange}>
+                      <option value="">All</option>
+                      {makes.map(make => <option key={make} value={make}>{make}</option>)}
+                    </select>
+                  </MobileFilterField>
+                  <MobileFilterField>
+                    <label>Model</label>
+                    <select name="model" value={filters.model} onChange={handleFilterChange}>
+                      <option value="">All</option>
+                      {models.map(model => <option key={model} value={model}>{model}</option>)}
+                    </select>
+                  </MobileFilterField>
+                  <MobileFilterField>
+                    <label>Year</label>
+                    <select name="year" value={filters.year} onChange={handleFilterChange}>
+                      <option value="">All</option>
+                      {years.map(year => <option key={year} value={year}>{year}</option>)}
+                    </select>
+                  </MobileFilterField>
+                  <MobileFilterField>
+                    <label>Min Price</label>
+                    <input name="minPrice" type="number" value={filters.minPrice} onChange={handleFilterChange} placeholder="$" min="0" />
+                  </MobileFilterField>
+                  <MobileFilterField>
+                    <label>Max Price</label>
+                    <input name="maxPrice" type="number" value={filters.maxPrice} onChange={handleFilterChange} placeholder="$" min="0" />
+                  </MobileFilterField>
+                </MobileFilterRow>
+              </MobileFilterContent>
+            )}
+          </MobileFilterCard>
+          <MobileCarGrid>
+            {filtered.length === 0 ? (
+              <NoResults>No cars found matching your criteria.</NoResults>
+            ) : (
+              filtered.map(car => {
+                const images = car.images && car.images.length > 0 ? car.images : [car.mainImage || '/placeholder-car.jpg'];
+                const idx = imageIndexes[car.vin] || 0;
+                return (
+                  <MobileCarCard key={car.vin}>
+                    <MobileCarImageSection>
+                      <MobileArrowButtonLeft onClick={() => handlePrevImage(car.vin)} aria-label="Previous image"><FaChevronLeft /></MobileArrowButtonLeft>
+                      <MobileCarImage src={images[idx]} alt={`${car.modelYear || car.year} ${car.make} ${car.model}`} />
+                      <MobileArrowButtonRight onClick={() => handleNextImage(car.vin)} aria-label="Next image"><FaChevronRight /></MobileArrowButtonRight>
+                    </MobileCarImageSection>
+                    <MobileCarInfoSection>
+                      <MobileCarTitleRow>
+                        <MobileCarTitle>{car.modelYear || car.year} {car.make} {car.model}</MobileCarTitle>
+                        <MobileCarPriceBlock>
+                          {car.pricing?.salesPrice && car.pricing?.salesPrice !== car.pricing?.price ? (
+                            <>
+                              <MobileCarPriceOld>${Number(car.pricing.price).toLocaleString()}</MobileCarPriceOld>
+                              <MobileCarPrice>${Number(car.pricing.salesPrice).toLocaleString()}</MobileCarPrice>
+                            </>
+                          ) : (
+                            <MobileCarPrice>${car.pricing?.price ? Number(car.pricing.price).toLocaleString() : 'Contact for price'}</MobileCarPrice>
+                          )}
+                        </MobileCarPriceBlock>
+                      </MobileCarTitleRow>
+                      <MobileCarSpecs>
+                        <span>{car.mileage ? `${Number(car.mileage).toLocaleString()} mi` : 'Mileage N/A'}</span>
+                        <MobileSpecGrid>
+                          {car.engine?.transmission && <MobileSpecItem><MobileSpecLabel>Transmission:</MobileSpecLabel> {car.engine.transmission}</MobileSpecItem>}
+                          {car.engine?.fuelType && <MobileSpecItem><MobileSpecLabel>Fuel:</MobileSpecLabel> {car.engine.fuelType}</MobileSpecItem>}
+                          {car.bodyClass && <MobileSpecItem><MobileSpecLabel>Body:</MobileSpecLabel> {car.bodyClass}</MobileSpecItem>}
+                          {(car.exterior?.color || car.exteriorColor || car.color) && <MobileSpecItem><MobileSpecLabel>Color:</MobileSpecLabel> {car.exterior?.color || car.exteriorColor || car.color}</MobileSpecItem>}
+                        </MobileSpecGrid>
+                      </MobileCarSpecs>
+                      <MobileCarActions>
+                        <MobileActionButton onClick={() => navigate(`/car/${car.vin}`)}>View Details</MobileActionButton>
+                        <MobileFinancingButton onClick={() => navigate('/financing')}>Apply for Financing</MobileFinancingButton>
+                      </MobileCarActions>
+                    </MobileCarInfoSection>
+                  </MobileCarCard>
+                );
+              })
+            )}
+          </MobileCarGrid>
+        </MobileInventoryOuter>
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>
@@ -480,6 +594,213 @@ const SpecLabel = styled.span`
   font-weight: 600;
   color: #4F8DFD;
   margin-right: 0.3rem;
+`;
+
+// Add styled-components for mobile layout below
+const MobileInventoryOuter = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  background: #f8fcff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 0 0 0;
+`;
+const MobileFilterCard = styled.div`
+  width: 94vw;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px 0 rgba(30,41,59,0.08);
+  margin: 1.2rem auto 1.5rem auto;
+  padding: 0.7rem 1rem;
+`;
+const MobileFilterHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.15rem;
+`;
+const MobileFilterContent = styled.div`
+  margin-top: 1rem;
+`;
+const MobileFilterRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+`;
+const MobileFilterField = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 120px;
+  min-width: 120px;
+  label {
+    font-size: 1.05rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    text-align: left;
+  }
+  select, input {
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    border-radius: 7px;
+    padding: 0.6rem 1rem;
+    height: 44px;
+    font-size: 1rem;
+    color: #2c3e50;
+    outline: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    width: 100%;
+  }
+`;
+const MobileCarGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100vw;
+  align-items: center;
+`;
+const MobileCarCard = styled.div`
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 6px 32px 0 rgba(30,41,59,0.10);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  min-width: 0;
+  max-width: 420px;
+  margin: 0 auto;
+  border: 1.5px solid #f3f4f6;
+  @media (max-width: 900px) {
+    width: 90vw;
+    max-width: 90vw;
+    margin: 0.7rem auto;
+  }
+`;
+const MobileCarImageSection = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: #f3f4f6;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const MobileCarImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+const MobileArrowButtonLeft = styled.button`
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.85);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+`;
+const MobileArrowButtonRight = styled(MobileArrowButtonLeft)`
+  left: unset;
+  right: 8px;
+`;
+const MobileCarInfoSection = styled.div`
+  padding: 1.1rem 1.1rem 0.3rem 1.1rem;
+  flex: 1;
+`;
+const MobileCarTitleRow = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.7rem;
+`;
+const MobileCarTitle = styled.h3`
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.3rem;
+`;
+const MobileCarPriceBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+const MobileCarPrice = styled.div`
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #3498db;
+  margin-bottom: 0.2rem;
+`;
+const MobileCarPriceOld = styled.div`
+  font-size: 1rem;
+  color: #b0b8c1;
+  text-decoration: line-through;
+`;
+const MobileCarSpecs = styled.div`
+  display: flex;
+  gap: 0.7rem;
+  font-size: 0.98rem;
+  color: #4a4a4a;
+  margin-bottom: 0.3rem;
+`;
+const MobileSpecGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+`;
+const MobileSpecItem = styled.div`
+  font-size: 0.93rem;
+  color: #6b7280;
+`;
+const MobileSpecLabel = styled.span`
+  font-weight: 600;
+  color: #2c3e50;
+  margin-right: 0.3rem;
+`;
+const MobileCarActions = styled.div`
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.7rem 1.1rem 1.1rem 1.1rem;
+`;
+const MobileActionButton = styled.button`
+  flex: 1;
+  background: linear-gradient(90deg, #2c3e50 0%, #3498db 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.02rem;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 0;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(44, 62, 80, 0.10);
+  transition: all 0.2s;
+  &:hover {
+    background: linear-gradient(90deg, #3498db 0%, #2c3e50 100%);
+    color: #f8fafc;
+  }
+`;
+const MobileFinancingButton = styled(MobileActionButton)`
+  background: #fff;
+  color: #1a1a1a;
+  border: 1.5px solid #3498db;
+  &:hover {
+    background: #f3f4f6;
+    color: #3498db;
+  }
 `;
 
 export default Inventory; 

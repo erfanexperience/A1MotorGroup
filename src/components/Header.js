@@ -49,8 +49,8 @@ const HeaderContainer = styled.header`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
   height: 72px;
 
-  @media (max-width: 768px) {
-    padding: 1rem 2rem;
+  @media (max-width: 900px) {
+    padding: 1rem 1.2rem;
   }
 `;
 
@@ -74,7 +74,7 @@ const NavContainer = styled.nav`
   gap: 3rem;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     position: fixed;
     top: 72px;
     left: 0;
@@ -120,7 +120,7 @@ const NavLink = styled(Link)`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     font-size: 1.2rem;
     width: 100%;
     text-align: center;
@@ -142,7 +142,7 @@ const PhoneLink = styled.a`
     text-decoration: underline;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     font-size: 1.2rem;
     width: 100%;
     text-align: center;
@@ -157,7 +157,7 @@ const MenuButton = styled.button`
   padding: 0.5rem;
   z-index: 1001;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     display: block;
   }
 `;
