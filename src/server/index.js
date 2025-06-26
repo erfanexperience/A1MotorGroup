@@ -56,13 +56,13 @@ const storage = multer.diskStorage({
       if (vin) {
         cb(null, `${vin}-Carfax.pdf`);
       } else {
-        cb(null, `carfax${path.extname(file.originalname)}`);
+      cb(null, `carfax${path.extname(file.originalname)}`);
       }
     } else if (file.fieldname === 'windowSticker') {
       if (vin) {
         cb(null, `${vin}-WindowSticker.pdf`);
       } else {
-        cb(null, `window-sticker${path.extname(file.originalname)}`);
+      cb(null, `window-sticker${path.extname(file.originalname)}`);
       }
     } else {
       cb(null, `${Date.now()}-${file.originalname}`);

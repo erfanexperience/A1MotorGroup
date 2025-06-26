@@ -271,90 +271,90 @@ const Home = () => {
       </MobileMain900>
       {/* Desktop/tablet layout (unchanged) */}
       <DesktopHome900>
-        <Header />
-        <HeroSection>
-          <HeroOverlay />
-          <HeroContent>
-            <HeroTitle>Luxury • Affordability • Excellence</HeroTitle>
-            <HeroSubtitle>Discover premium pre-owned vehicles that combine luxury with exceptional value</HeroSubtitle>
-          </HeroContent>
-          <SearchBoxWrapper>
-            <SearchCard>
-              <ToggleRow>
-                <SearchTypeToggle>
-                  <ToggleButton 
-                    active={searchType === 'make'} 
-                    onClick={() => setSearchType('make')}
-                  >
-                    Search by Make
-                  </ToggleButton>
-                  <ToggleButton 
-                    active={searchType === 'budget'} 
-                    onClick={() => setSearchType('budget')}
-                  >
-                    Search by Budget
-                  </ToggleButton>
-                </SearchTypeToggle>
-              </ToggleRow>
-              {searchType === 'make' ? (
-                <>
-                  <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <SearchLabel>What brand are you looking for?</SearchLabel>
-                    <SearchCardContentRow>
-                      <SearchSelect value={selectedMake} onChange={e => setSelectedMake(e.target.value)}>
-                        <option value="">Select a Make</option>
-                        {availableMakes.map(make => (
-                          <option key={make} value={make}>{make}</option>
-                        ))}
-                      </SearchSelect>
-                      <SearchButton onClick={handleSearch}>Search</SearchButton>
-                    </SearchCardContentRow>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <SearchLabel>What's your budget to get your dream car?</SearchLabel>
-                    <SearchCardContentRow>
-                      <BudgetContainer>
-                        <BudgetLabel>Your Budget: ${budget.toLocaleString()}</BudgetLabel>
-                        <BudgetSlider
-                          type="range"
-                          min="0"
-                          max="200000"
-                          step="1000"
-                          value={budget}
-                          onChange={e => setBudget(Number(e.target.value))}
-                        />
-                        <BudgetRange>
-                          <span>$0</span>
-                          <span>$200,000</span>
-                        </BudgetRange>
-                      </BudgetContainer>
-                      <SearchButton onClick={handleSearch}>Search</SearchButton>
-                    </SearchCardContentRow>
-                  </div>
-                </>
-              )}
-            </SearchCard>
-          </SearchBoxWrapper>
-        </HeroSection>
+      <Header />
+      <HeroSection>
+        <HeroOverlay />
+        <HeroContent>
+          <HeroTitle>Luxury • Affordability • Excellence</HeroTitle>
+          <HeroSubtitle>Discover premium pre-owned vehicles that combine luxury with exceptional value</HeroSubtitle>
+        </HeroContent>
+        <SearchBoxWrapper>
+          <SearchCard>
+            <ToggleRow>
+              <SearchTypeToggle>
+                <ToggleButton 
+                  active={searchType === 'make'} 
+                  onClick={() => setSearchType('make')}
+                >
+                  Search by Make
+                </ToggleButton>
+                <ToggleButton 
+                  active={searchType === 'budget'} 
+                  onClick={() => setSearchType('budget')}
+                >
+                  Search by Budget
+                </ToggleButton>
+              </SearchTypeToggle>
+            </ToggleRow>
+            {searchType === 'make' ? (
+              <>
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <SearchLabel>What brand are you looking for?</SearchLabel>
+                  <SearchCardContentRow>
+            <SearchSelect value={selectedMake} onChange={e => setSelectedMake(e.target.value)}>
+              <option value="">Select a Make</option>
+              {availableMakes.map(make => (
+                <option key={make} value={make}>{make}</option>
+              ))}
+            </SearchSelect>
+                    <SearchButton onClick={handleSearch}>Search</SearchButton>
+                  </SearchCardContentRow>
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <SearchLabel>What's your budget to get your dream car?</SearchLabel>
+                  <SearchCardContentRow>
+                    <BudgetContainer>
+                <BudgetLabel>Your Budget: ${budget.toLocaleString()}</BudgetLabel>
+                <BudgetSlider
+                  type="range"
+                  min="0"
+                  max="200000"
+                  step="1000"
+                  value={budget}
+                  onChange={e => setBudget(Number(e.target.value))}
+                />
+                <BudgetRange>
+                  <span>$0</span>
+                  <span>$200,000</span>
+                </BudgetRange>
+              </BudgetContainer>
+                    <SearchButton onClick={handleSearch}>Search</SearchButton>
+                  </SearchCardContentRow>
+                </div>
+              </>
+            )}
+          </SearchCard>
+        </SearchBoxWrapper>
+      </HeroSection>
 
-        {/* Car List Section */}
-        <CarListSection>
-          <SortBar>
-            <SortLabel>Sort by:</SortLabel>
-            <SortSelect value={sortBy} onChange={e => setSortBy(e.target.value)}>
-              <option value="price">Price</option>
-              <option value="year">Year</option>
-              <option value="mileage">Mileage</option>
-            </SortSelect>
-          </SortBar>
-          <CarGrid>
+      {/* Car List Section */}
+      <CarListSection>
+        <SortBar>
+          <SortLabel>Sort by:</SortLabel>
+          <SortSelect value={sortBy} onChange={e => setSortBy(e.target.value)}>
+            <option value="price">Price</option>
+            <option value="year">Year</option>
+            <option value="mileage">Mileage</option>
+          </SortSelect>
+        </SortBar>
+        <CarGrid>
             {sortedVehicles.map(car => {
               const carDetailsUrl = `/car/${car.vin}`;
               return (
-                <CarCard key={car.vin}>
+            <CarCard key={car.vin}>
                   <a
                     href={carDetailsUrl}
                     target="_blank"
@@ -364,34 +364,34 @@ const Home = () => {
                   >
                     <CarImageWrapper as="div">
                       <CarImage src={car.mainImage || placeholderImage} alt={`${car.modelYear || car.year || ''} ${car.make} ${car.model}`} />
-                      <ImageOverlay />
-                      <DealershipLogo src={logoMain} alt="A1 Motor Group" />
-                    </CarImageWrapper>
-                    <CarInfo>
-                      <CarTitle>{(car.modelYear || car.year || 'N/A')} {car.make} {car.model}</CarTitle>
-                      <CarPrice>
-                        {car.pricing && car.pricing.salesPrice && car.pricing.salesPrice !== car.pricing.price ? (
-                          <>
-                            <span style={{ textDecoration: 'line-through', color: '#b0b8c1', marginRight: 8 }}>
-                              ${Number(car.pricing.price).toLocaleString()}
-                            </span>
-                            <span style={{ color: '#2196F3', fontWeight: 700, fontSize: '1.15em' }}>
-                              ${Number(car.pricing.salesPrice).toLocaleString()}
-                            </span>
-                          </>
-                        ) : car.pricing && car.pricing.price ? (
-                          `$${Number(car.pricing.price).toLocaleString()}`
-                        ) : 'N/A'}
-                      </CarPrice>
-                      <KeySpecsRow>
-                        <Spec>{car.mileage !== undefined && car.mileage !== null ? `${Number(car.mileage).toLocaleString()} mi` : 'N/A'}</Spec>
-                        <Spec>{car.engine?.transmission || '-'}</Spec>
-                        <Spec>{car.engine?.fuelType || '-'}</Spec>
-                        <Spec>{car.exterior?.color || '-'}</Spec>
-                      </KeySpecsRow>
-                    </CarInfo>
+                <ImageOverlay />
+                <DealershipLogo src={logoMain} alt="A1 Motor Group" />
+              </CarImageWrapper>
+              <CarInfo>
+                <CarTitle>{(car.modelYear || car.year || 'N/A')} {car.make} {car.model}</CarTitle>
+                <CarPrice>
+                  {car.pricing && car.pricing.salesPrice && car.pricing.salesPrice !== car.pricing.price ? (
+                    <>
+                      <span style={{ textDecoration: 'line-through', color: '#b0b8c1', marginRight: 8 }}>
+                        ${Number(car.pricing.price).toLocaleString()}
+                      </span>
+                      <span style={{ color: '#2196F3', fontWeight: 700, fontSize: '1.15em' }}>
+                        ${Number(car.pricing.salesPrice).toLocaleString()}
+                      </span>
+                    </>
+                  ) : car.pricing && car.pricing.price ? (
+                    `$${Number(car.pricing.price).toLocaleString()}`
+                  ) : 'N/A'}
+                </CarPrice>
+                <KeySpecsRow>
+                  <Spec>{car.mileage !== undefined && car.mileage !== null ? `${Number(car.mileage).toLocaleString()} mi` : 'N/A'}</Spec>
+                  <Spec>{car.engine?.transmission || '-'}</Spec>
+                  <Spec>{car.engine?.fuelType || '-'}</Spec>
+                  <Spec>{car.exterior?.color || '-'}</Spec>
+                </KeySpecsRow>
+              </CarInfo>
                   </a>
-                  <CarActions>
+              <CarActions>
                     <BookButton onClick={() => { setIsBookModalOpen(true); setBookCarVin(car.vin); }}>Book Test Drive</BookButton>
                     <a
                       href={carDetailsUrl}
@@ -401,79 +401,79 @@ const Home = () => {
                     >
                       View Details
                     </a>
-                  </CarActions>
-                </CarCard>
+              </CarActions>
+            </CarCard>
               );
             })}
-          </CarGrid>
-        </CarListSection>
+        </CarGrid>
+      </CarListSection>
 
-        {/* We Buy Cars Section */}
-        <WeBuySection>
-          <WeBuyOverlay />
-          <WeBuyContent>
-            <WeBuyTitle>Not Like Other Websites</WeBuyTitle>
-            <WeBuySubtitle>We are NOT buying your car 100% online. As a small dealership, we believe in face-to-face conversations about your vehicle.</WeBuySubtitle>
-          </WeBuyContent>
-          <WeBuySearchBoxWrapper>
-            <WeBuySearchCard>
-              <WeBuySearchLabel>Enter your vehicle information</WeBuySearchLabel>
-              <WeBuySearchCardContentRow>
-                <WeBuySearchInput 
-                  type="text" 
-                  placeholder="Enter License Plate or VIN"
-                  maxLength={17}
-                />
-                <WeBuySearchButton onClick={() => window.location.href = '/sell'}>Get a Quote</WeBuySearchButton>
-              </WeBuySearchCardContentRow>
-            </WeBuySearchCard>
-          </WeBuySearchBoxWrapper>
-        </WeBuySection>
+      {/* We Buy Cars Section */}
+      <WeBuySection>
+        <WeBuyOverlay />
+        <WeBuyContent>
+          <WeBuyTitle>Not Like Other Websites</WeBuyTitle>
+          <WeBuySubtitle>We are NOT buying your car 100% online. As a small dealership, we believe in face-to-face conversations about your vehicle.</WeBuySubtitle>
+        </WeBuyContent>
+        <WeBuySearchBoxWrapper>
+          <WeBuySearchCard>
+            <WeBuySearchLabel>Enter your vehicle information</WeBuySearchLabel>
+            <WeBuySearchCardContentRow>
+              <WeBuySearchInput 
+                type="text" 
+                placeholder="Enter License Plate or VIN"
+                maxLength={17}
+              />
+              <WeBuySearchButton onClick={() => window.location.href = '/sell'}>Get a Quote</WeBuySearchButton>
+            </WeBuySearchCardContentRow>
+          </WeBuySearchCard>
+        </WeBuySearchBoxWrapper>
+      </WeBuySection>
 
-        {/* Contact Section */}
-        <ContactSection>
-          <ContactInfoCol>
-            <ContactTitle>Find Us</ContactTitle>
-            <ContactItem>
-              <ContactLabel>Phone</ContactLabel>
-              <ContactValue><a href="tel:+14089825456">(408) 982-5456</a></ContactValue>
-            </ContactItem>
-            <ContactItem>
-              <ContactLabel>Working Hours</ContactLabel>
-              <ContactValue>Mon - Saturday 10AM - 5PM</ContactValue>
-            </ContactItem>
-            <ContactItem>
-              <ContactLabel>Our Address</ContactLabel>
-              <ContactValue>345 Saratoga Ave, San Jose, CA 95129</ContactValue>
-            </ContactItem>
-          </ContactInfoCol>
-          <MapCol>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.3327925305077!2d-121.9473!3d37.3022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e33c9c6c3c6b1%3A0x9c7c6c3c6c3c6c3c!2s345%20Saratoga%20Ave%2C%20San%20Jose%2C%20CA%2095129!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Google Map"
-            ></iframe>
-          </MapCol>
-        </ContactSection>
+      {/* Contact Section */}
+      <ContactSection>
+        <ContactInfoCol>
+          <ContactTitle>Find Us</ContactTitle>
+          <ContactItem>
+            <ContactLabel>Phone</ContactLabel>
+            <ContactValue><a href="tel:+14089825456">(408) 982-5456</a></ContactValue>
+          </ContactItem>
+          <ContactItem>
+            <ContactLabel>Working Hours</ContactLabel>
+            <ContactValue>Mon - Saturday 10AM - 5PM</ContactValue>
+          </ContactItem>
+          <ContactItem>
+            <ContactLabel>Our Address</ContactLabel>
+            <ContactValue>345 Saratoga Ave, San Jose, CA 95129</ContactValue>
+          </ContactItem>
+        </ContactInfoCol>
+        <MapCol>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.3327925305077!2d-121.9473!3d37.3022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e33c9c6c3c6b1%3A0x9c7c6c3c6c3c6c3c!2s345%20Saratoga%20Ave%2C%20San%20Jose%2C%20CA%2095129!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Google Map"
+          ></iframe>
+        </MapCol>
+      </ContactSection>
 
-        {/* Financing Section */}
-        <FinancingSection>
-          <FinancingOverlay />
-          <FinancingContent>
-            <FinancingTitle>Personalized Financing Solutions</FinancingTitle>
-            <FinancingDescription>
-              Every customer's situation is unique. We believe in face-to-face conversations at our dealership to create a financing plan that works specifically for you.
-            </FinancingDescription>
-            <FinancingButton onClick={() => window.location.href = '/financing'}>
-              Start Your Application
-            </FinancingButton>
-          </FinancingContent>
-        </FinancingSection>
+      {/* Financing Section */}
+      <FinancingSection>
+        <FinancingOverlay />
+        <FinancingContent>
+          <FinancingTitle>Personalized Financing Solutions</FinancingTitle>
+          <FinancingDescription>
+            Every customer's situation is unique. We believe in face-to-face conversations at our dealership to create a financing plan that works specifically for you.
+          </FinancingDescription>
+          <FinancingButton onClick={() => window.location.href = '/financing'}>
+            Start Your Application
+          </FinancingButton>
+        </FinancingContent>
+      </FinancingSection>
 
         <BookTestDriveModal
           isOpen={isBookModalOpen}
@@ -483,7 +483,7 @@ const Home = () => {
           onSubmit={() => { setIsBookModalOpen(false); setBookCarVin(null); }}
         />
 
-        <Footer />
+      <Footer />
       </DesktopHome900>
     </PageContainer>
   );
@@ -1036,8 +1036,8 @@ const WeBuySearchLabel = styled.div`
 
 const WeBuySearchCardContentRow = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 100%;
+    flex-direction: column;
+    width: 100%;
   align-items: stretch;
   gap: 0.7rem;
 `;
@@ -1159,12 +1159,13 @@ const MapCol = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 900px) {
-    padding: 0 10px;
-    width: 100%;
+    padding: 20px 10px;
+    align-self: center;
+    width: 90%;
     min-height: 240px;
     height: 240px;
     max-width: 100vw;
-    aspect-ratio: 1;
+    aspect-ratio: 1/1;
   }
   iframe {
     width: 100%;
@@ -1563,4 +1564,4 @@ const MobileFinancingButton = styled.button`
   }
 `;
 
-export default Home;
+export default Home; 
