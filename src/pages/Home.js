@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import heroImg from '../assests/hero-img.png';
-import heroImgMobile from '../assests/hero-img-mobile.png';
+import heroImg from '../assests/hero-img.webp';
+import heroImgMobile from '../assests/hero-img-mobile.webp';
 import { FaRegHeart, FaHeart, FaImages, FaBars } from 'react-icons/fa';
-import logoMain from '../assests/logo-main.png';
+import logoMain from '../assests/logo-main.webp';
 import Footer from '../components/Footer';
 import BookTestDriveModal from '../components/BookTestDriveModal';
-import placeholderImage from '../assests/palceholder.png';
-import weBuyImgMobile from '../assests/we-buy-mobile.png';
-import financeImgMobile from '../assests/finance-mobile.png';
+import placeholderImage from '../assests/palceholder.webp';
+import weBuyImgMobile from '../assests/we-buy-mobile.webp';
+import financeImgMobile from '../assests/finance-mobile.webp';
+import weBuy from '../assests/we-buy.webp';
+import finance from '../assests/finance.webp';
 
 // Add font-face for Martel-Bold
 const MartelFontFace = `
@@ -929,7 +931,7 @@ const WeBuySection = styled.section`
   width: 100vw;
   height: 70vh;
   min-height: 420px;
-  background: url(${require('../assests/we-buy.png')}) center center/cover no-repeat;
+  background: url(${weBuy}) center center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1180,7 +1182,7 @@ const FinancingSection = styled.section`
   width: 100vw;
   height: 60vh;
   min-height: 380px;
-  background: url(${require('../assests/finance.png')}) center center/cover no-repeat;
+  background: url(${finance}) center center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: flex-start;

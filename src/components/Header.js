@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import logoMain from '../assests/logo-main.png';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import logo from '../assests/logo-main.webp';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Logo to="/home">
-        <LogoImage src={logoMain} alt="Luxury Car Dealership" />
+        <LogoImage src={logo} alt="Luxury Car Dealership" />
       </Logo>
       <NavContainer isOpen={isMenuOpen}>
         <NavLink to="/inventory">Inventory</NavLink>

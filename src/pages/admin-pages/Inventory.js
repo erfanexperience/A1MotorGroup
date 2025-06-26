@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import Modal from '../../components/Modal';
 import AddVehicle from './AddVehicle';
-import placeholderImage from '../../assests/palceholder.png';
+import placeholderImage from '../../assests/palceholder.webp';
 
 const Inventory = () => {
   const [vehicles, setVehicles] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import adminLogo from '../../assests/logo-admin-page.png';
+import logo from '../../assests/logo-admin-page.webp';
 import { useAdminAuth } from '../../contexts/AdminAuthContext';
 
 const AdminLayout = () => {
@@ -58,7 +58,7 @@ const AdminLayout = () => {
             <span></span>
           </MenuIcon>
         </MobileMenuButton>
-        <MobileLogo src={adminLogo} alt="A1 Motor Group" />
+        <MobileLogo src={logo} alt="A1 Motor Group" />
         <MobileUserInfo>
           <MobileUserName>{username}</MobileUserName>
         </MobileUserInfo>
@@ -66,7 +66,7 @@ const AdminLayout = () => {
 
       <Sidebar isOpen={isSidebarOpen} isModalOpen={isModalOpen}>
         <LogoContainer>
-          <Logo src={adminLogo} alt="A1 Motor Group" />
+          <Logo src={logo} alt="A1 Motor Group" />
         </LogoContainer>
         <NavList>
           <NavItem 

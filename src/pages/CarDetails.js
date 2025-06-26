@@ -6,7 +6,7 @@ import { FaTachometerAlt, FaCogs, FaGasPump, FaPalette, FaCarSide, FaIdCard, FaE
 import axios from 'axios';
 import './CarDetails.css';
 import BookTestDriveModal from '../components/BookTestDriveModal';
-import placeholderImage from '../assests/palceholder.png';
+import placeholderImage from '../assests/palceholder.webp';
 
 const CarDetails = () => {
   const { id } = useParams();

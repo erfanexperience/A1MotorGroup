@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import logo from '../assests/logo-main.webp';
 
 const Footer = () => (
   <FooterContainer>
     <FooterContent>
       <FooterLogoNav>
-        <FooterLogo src={require('../assests/logo-main.png')} alt="A1 Motor Group" />
+        <FooterLogo src={logo} alt="A1 Motor Group" />
         <FooterNav>
           <FooterNavLink href="/inventory">Inventory</FooterNavLink>
           <FooterNavLink href="/about">About Us</FooterNavLink>

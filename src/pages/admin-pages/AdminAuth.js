@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import adminLogo from '../../assests/logo-admin-page.png';
+import adminLogo from '../../assests/logo-admin-page.webp';
 import { useAdminAuth } from '../../contexts/AdminAuthContext';
 
 const AdminAuth = () => {
