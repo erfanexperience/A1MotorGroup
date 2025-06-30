@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { FaTachometerAlt, FaCogs, FaGasPump, FaPalette, FaCarSide, FaIdCard, FaEnvelope, FaChevronLeft, FaChevronRight, FaTimes, FaPhone, FaCalendarAlt, FaFilePdf, FaImages, FaShareAlt, FaPrint, FaPhoneAlt, FaMoneyCheckAlt } from 'react-icons/fa';
+import { 
+  FaShareAlt, 
+  FaPrint, 
+  FaImages, 
+  FaCarSide, 
+  FaCogs, 
+  FaGasPump, 
+  FaIdCard, 
+  FaTachometerAlt, 
+  FaPalette, 
+  FaCalendarAlt, 
+  FaMoneyCheckAlt, 
+  FaPhoneAlt, 
+  FaFilePdf, 
+  FaTimes, 
+  FaChevronLeft, 
+  FaChevronRight 
+} from 'react-icons/fa';
 import axios from 'axios';
 import './CarDetails.css';
 import BookTestDriveModal from '../components/BookTestDriveModal';

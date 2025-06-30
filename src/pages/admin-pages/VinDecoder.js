@@ -82,31 +82,20 @@ const VinDecoder = ({ onVehicleData, existingData }) => {
       console.log('NHTSA VIN decode results:', results); // Debug: log all results
 
       // Fallback logic for transmission and horsepower
-      const getTransmission = (results) => {
-        const tryFields = [
-          'Transmission Style',
-          'Transmission Type',
-          'Transmission',
-          'Transmission Speeds',
-        ];
-        for (const field of tryFields) {
-          const val = findValue(results, field);
-          if (val && val !== 'N/A') return val;
-        }
-        return '';
+      const getTransmission = (data) => {
+        return data.engine?.transmission || 
+               data.transmission || 
+               data.vehicle?.engine?.transmission ||
+               data.vehicle?.transmission ||
+               'N/A';
       };
-      const getHorsePower = (results) => {
-        const tryFields = [
-          'Engine Brake (hp) From',
-          'Engine Power (kW)',
-          'Engine Brake (hp) To',
-          'Engine Horsepower',
-        ];
-        for (const field of tryFields) {
-          const val = findValue(results, field);
-          if (val && val !== 'N/A') return val + (field === 'Engine Power (kW)' ? ' kW' : '');
-        }
-        return '';
+
+      const getBody = (data) => {
+        return data.body || 
+               data.bodyClass || 
+               data.vehicle?.body ||
+               data.vehicle?.bodyClass ||
+               'N/A';
       };
       
       const newData = {
@@ -115,7 +104,7 @@ const VinDecoder = ({ onVehicleData, existingData }) => {
         make: findValue(results, 'Make'),
         model: findValue(results, 'Model'),
         modelYear: findValue(results, 'Model Year'),
-        body: findValue(results, 'Body Class'),
+        body: getBody(results),
         engine: {
           ...vehicleData.engine,
           type: `${findValue(results, 'Engine Configuration')} ${findValue(results, 'Displacement (L)')}L`,
@@ -566,33 +555,6 @@ const FeatureItem = styled.div`
 
   @media (max-width: 768px) {
     gap: 0.75rem;
-  }
-`;
-
-const RemoveButton = styled.button`
-  background: none;
-  border: none;
-  color: #e53e3e;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.25rem;
-  line-height: 1;
-
-  &:hover {
-    color: #c53030;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.25rem;
-    padding: 0.5rem;
-  }
-`;
-
-const AddButton = styled(Button)`
-  width: fit-content;
-
-  @media (max-width: 768px) {
-    width: 100%;
   }
 `;
 

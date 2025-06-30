@@ -5,8 +5,8 @@ import adminLogo from '../../assests/logo-admin-page.webp';
 import { useAdminAuth } from '../../contexts/AdminAuthContext';
 
 const AdminLayout = () => {
+  const { user, logout } = useAdminAuth();
   const navigate = useNavigate();
-  const { isAuthenticated, username, logout } = useAdminAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -60,7 +60,7 @@ const AdminLayout = () => {
         </MobileMenuButton>
         <MobileLogo src={adminLogo} alt="A1 Motor Group" />
         <MobileUserInfo>
-          <MobileUserName>{username}</MobileUserName>
+          <MobileUserName>{user}</MobileUserName>
         </MobileUserInfo>
       </MobileHeader>
 
@@ -81,7 +81,7 @@ const AdminLayout = () => {
         </NavList>
         <UserSection>
           <UserInfo>
-            <UserName>{username}</UserName>
+            <UserName>{user}</UserName>
             <UserRole>Dealership Admin</UserRole>
           </UserInfo>
           <LogoutButton onClick={handleLogout}>Logout</LogoutButton>

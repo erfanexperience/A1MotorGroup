@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import Modal from '../../components/Modal';
 import AddVehicle from './AddVehicle';
@@ -11,7 +10,6 @@ const Inventory = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [modalTitle, setModalTitle] = useState('Add New Vehicle');
-  const navigate = useNavigate();
 
   useEffect(() => {
     loadVehicles();

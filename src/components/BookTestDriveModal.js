@@ -52,11 +52,14 @@ function getBusySlotsForDate(dateStr) {
 const BookTestDriveModal = ({ isOpen, onClose, cars, preselectedCarVin, onSubmit }) => {
   const [step, setStep] = useState(1);
   const [selectedCarVin, setSelectedCarVin] = useState(preselectedCarVin || '');
-  const [date, setDate] = useState(formatDate(today));
-  const [time, setTime] = useState('10:00');
-  const [fullName, setFullName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
 
@@ -69,17 +72,57 @@ const BookTestDriveModal = ({ isOpen, onClose, cars, preselectedCarVin, onSubmit
     }
   }, [isOpen, preselectedCarVin]);
 
-  // Compute busy slots for the selected date
-  const busySlots = useMemo(() => getBusySlotsForDate(date), [date]);
-
-  // If the selected time becomes busy, reset to first available
-  useEffect(() => {
-    const idx = TIME_SLOTS.findIndex(s => s.value === time);
-    if (busySlots.includes(idx)) {
-      const firstAvailable = TIME_SLOTS.find((_, i) => !busySlots.includes(i));
-      if (firstAvailable) setTime(firstAvailable.value);
+  // Generate time slots from 10 AM to 4 PM
+  const timeSlots = useMemo(() => {
+    const slots = [];
+    for (let hour = 10; hour <= 16; hour++) {
+      slots.push(`${hour}:00`);
+      if (hour !== 16) slots.push(`${hour}:30`);
     }
-  }, [date]);
+    return slots;
+  }, []);
+
+  // Generate random busy slots (30% of slots)
+  const busySlots = useMemo(() => {
+    const busy = new Set();
+    const totalSlots = timeSlots.length;
+    const busyCount = Math.floor(totalSlots * 0.3);
+    
+    while (busy.size < busyCount) {
+      const randomIndex = Math.floor(Math.random() * totalSlots);
+      busy.add(randomIndex);
+    }
+    
+    return busy;
+  }, [timeSlots]);
+
+  // Filter out Sundays and busy slots
+  const availableTimeSlots = useMemo(() => {
+    return timeSlots.filter((_, index) => !busySlots.has(index));
+  }, [timeSlots, busySlots]);
+
+  // Set default date to next available day (not Sunday)
+  useEffect(() => {
+    if (!selectedDate) {
+      const today = new Date();
+      let nextDay = new Date(today);
+      nextDay.setDate(today.getDate() + 1);
+      
+      // Skip Sundays
+      while (nextDay.getDay() === 0) {
+        nextDay.setDate(nextDay.getDate() + 1);
+      }
+      
+      setSelectedDate(nextDay.toISOString().split('T')[0]);
+    }
+  }, [selectedDate]);
+
+  // Set default time to first available slot
+  useEffect(() => {
+    if (!selectedTime && availableTimeSlots.length > 0) {
+      setSelectedTime(availableTimeSlots[0]);
+    }
+  }, [selectedTime, availableTimeSlots]);
 
   if (!isOpen) return null;
 
@@ -90,14 +133,14 @@ const BookTestDriveModal = ({ isOpen, onClose, cars, preselectedCarVin, onSubmit
     let errs = {};
     if (step === 1 && !selectedCarVin) errs.selectedCarVin = 'Please select a car.';
     if (step === 2) {
-      if (!date) errs.date = 'Please select a date.';
-      if (isSunday(date)) errs.date = 'We are closed on Sundays.';
-      if (!time) errs.time = 'Please select a time.';
+      if (!selectedDate) errs.date = 'Please select a date.';
+      if (isSunday(selectedDate)) errs.date = 'We are closed on Sundays.';
+      if (!selectedTime) errs.time = 'Please select a time.';
     }
     if (step === 3) {
-      if (!fullName.trim()) errs.fullName = 'Full name required.';
-      if (!phone.trim()) errs.phone = 'Phone required.';
-      if (!email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) errs.email = 'Valid email required.';
+      if (!userInfo.name.trim()) errs.name = 'Full name required.';
+      if (!userInfo.phone.trim()) errs.phone = 'Phone required.';
+      if (!userInfo.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(userInfo.email)) errs.email = 'Valid email required.';
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -110,7 +153,7 @@ const BookTestDriveModal = ({ isOpen, onClose, cars, preselectedCarVin, onSubmit
 
   const handleDateChange = e => {
     const val = e.target.value;
-    if (!isSunday(val)) setDate(val);
+    if (!isSunday(val)) setSelectedDate(val);
   };
 
   const handleSubmit = e => {
@@ -120,11 +163,11 @@ const BookTestDriveModal = ({ isOpen, onClose, cars, preselectedCarVin, onSubmit
     if (onSubmit) {
       onSubmit({
         carVin: selectedCarVin,
-        date,
-        time,
-        fullName,
-        phone,
-        email,
+        date: selectedDate,
+        time: selectedTime,
+        fullName: userInfo.name,
+        phone: userInfo.phone,
+        email: userInfo.email,
       });
     }
   };
@@ -177,25 +220,24 @@ const BookTestDriveModal = ({ isOpen, onClose, cars, preselectedCarVin, onSubmit
                     type="date"
                     min={minDate}
                     max={maxDate}
-                    value={date}
+                    value={selectedDate}
                     onChange={handleDateChange}
                     required
                   />
                   {errors.date && <ErrorMsg>{errors.date}</ErrorMsg>}
                   <Label>Time</Label>
                   <Select
-                    value={time}
-                    onChange={e => setTime(e.target.value)}
+                    value={selectedTime}
+                    onChange={e => setSelectedTime(e.target.value)}
                     required
                   >
-                    {TIME_SLOTS.map((slot, idx) => (
+                    {availableTimeSlots.map((slot, idx) => (
                       <option
-                        key={slot.value}
-                        value={slot.value}
-                        disabled={busySlots.includes(idx)}
-                        style={busySlots.includes(idx) ? { color: '#aaa', background: '#f3f4f6' } : {}}
+                        key={slot}
+                        value={slot}
+                        style={busySlots.has(idx) ? { color: '#aaa', background: '#f3f4f6' } : {}}
                       >
-                        {slot.label}
+                        {slot}
                       </option>
                     ))}
                   </Select>
@@ -211,24 +253,24 @@ const BookTestDriveModal = ({ isOpen, onClose, cars, preselectedCarVin, onSubmit
                   <Label>Full Name</Label>
                   <Input
                     type="text"
-                    value={fullName}
-                    onChange={e => setFullName(e.target.value)}
+                    value={userInfo.name}
+                    onChange={e => setUserInfo({ ...userInfo, name: e.target.value })}
                     required
                   />
-                  {errors.fullName && <ErrorMsg>{errors.fullName}</ErrorMsg>}
+                  {errors.name && <ErrorMsg>{errors.name}</ErrorMsg>}
                   <Label>Phone Number</Label>
                   <Input
                     type="tel"
-                    value={phone}
-                    onChange={e => setPhone(e.target.value)}
+                    value={userInfo.phone}
+                    onChange={e => setUserInfo({ ...userInfo, phone: e.target.value })}
                     required
                   />
                   {errors.phone && <ErrorMsg>{errors.phone}</ErrorMsg>}
                   <Label>Email</Label>
                   <Input
                     type="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    value={userInfo.email}
+                    onChange={e => setUserInfo({ ...userInfo, email: e.target.value })}
                     required
                   />
                   {errors.email && <ErrorMsg>{errors.email}</ErrorMsg>}

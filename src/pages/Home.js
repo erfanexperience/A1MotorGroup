@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import heroImg from '../assests/hero-img.webp';
-import heroImgMobile from '../assests/hero-img-mobile.webp';
-import { FaRegHeart, FaHeart, FaImages, FaBars } from 'react-icons/fa';
-import logoMain from '../assests/logo-main.webp';
 import Footer from '../components/Footer';
 import BookTestDriveModal from '../components/BookTestDriveModal';
+import { FaSearch, FaFilter, FaStar, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp, FaFacebook, FaInstagram, FaTwitter, FaYoutube, FaLinkedin, FaChevronRight, FaChevronLeft, FaCalendarAlt, FaMoneyCheckAlt, FaCarSide, FaCogs, FaGasPump, FaIdCard, FaTachometerAlt, FaPalette, FaFilePdf, FaShareAlt, FaPrint, FaImages, FaBars, FaTimes, FaHeart, FaRegHeart } from 'react-icons/fa';
+import styled from 'styled-components';
+import axios from 'axios';
+import heroImg from '../assests/hero-img.webp';
+import heroImgMobile from '../assests/hero-img-mobile.webp';
 import placeholderImage from '../assests/palceholder.webp';
 import weBuyImgMobile from '../assests/we-buy-mobile.webp';
+import weBuyImg from '../assests/we-buy.webp';
+import buyImg from '../assests/buy.webp';
+import buyImgMobile from '../assests/buy-mobile.webp';
+import financeImg from '../assests/finance.webp';
 import financeImgMobile from '../assests/finance-mobile.webp';
+import aboutImg from '../assests/about.webp';
+import aboutImgMobile from '../assests/about-mobile.webp';
+import logoMain from '../assests/logo-main.webp';
 
 // Add font-face for Martel-Bold
 const MartelFontFace = `
@@ -929,7 +936,7 @@ const WeBuySection = styled.section`
   width: 100vw;
   height: 70vh;
   min-height: 420px;
-  background: url(${require('../assests/we-buy.webp')}) center center/cover no-repeat;
+  background: url(${weBuyImg}) center center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1179,7 +1186,7 @@ const FinancingSection = styled.section`
   width: 100vw;
   height: 60vh;
   min-height: 380px;
-  background: url(${require('../assests/finance.webp')}) center center/cover no-repeat;
+  background: url(${financeImg}) center center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: flex-start;

@@ -21,6 +21,9 @@ const AddVehicle = ({ onSuccess, existingData }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [bulkFeatures, setBulkFeatures] = useState('');
+  const [formData, setFormData] = useState({
+    // ... existing code ...
+  });
 
   // Initialize with existing data if provided
   useEffect(() => {
@@ -631,33 +634,6 @@ const Container = styled.div`
   }
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: stretch;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  color: #2d3748;
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-    text-align: center;
-  }
-
-  @media (max-width: 600px) {
-    font-size: 1.25rem;
-  }
-`;
-
 const SaveButton = styled.button`
   background: #3182ce;
   color: white;
@@ -883,16 +859,6 @@ const CertificatePreview = styled.div`
     gap: 0.75rem;
     align-items: stretch;
   }
-`;
-
-const CertificateInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-`;
-
-const DocumentIcon = styled.span`
-  font-size: 1.5rem;
 `;
 
 const CertificateName = styled.span`
@@ -1192,6 +1158,141 @@ const SectionTitle = styled.h3`
 
   @media (max-width: 768px) {
     font-size: 1.1rem;
+  }
+`;
+
+const FormSection = styled.div`
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+`;
+
+const FormGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FormRow = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+`;
+
+const Textarea = styled.textarea`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-height: 100px;
+  resize: vertical;
+  
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+`;
+
+const Button = styled.button`
+  padding: 0.75rem 1.5rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  
+  &:hover {
+    background: #2563eb;
+  }
+  
+  &:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+  }
+`;
+
+const SuccessMessage = styled.div`
+  color: #059669;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+`;
+
+const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+`;
+
+const Checkbox = styled.input`
+  width: 1rem;
+  height: 1rem;
+`;
+
+const CheckboxLabel = styled.label`
+  font-size: 0.875rem;
+  color: #374151;
+`;
+
+const FeaturesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 1rem;
+  background: #f9fafb;
+`;
+
+const BulkFeaturesTextarea = styled.textarea`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-height: 80px;
+  resize: vertical;
+  margin-bottom: 1rem;
+  
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+`;
+
+const BulkFeaturesButton = styled.button`
+  padding: 0.5rem 1rem;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 1rem;
+  
+  &:hover {
+    background: #059669;
   }
 `;
 
