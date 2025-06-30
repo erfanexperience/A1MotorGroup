@@ -1,0 +1,107 @@
+{
+  "vin": "1FM5K8GC2MGB21183",
+  "stockNumber": "10007",
+  "make": "FORD",
+  "model": "Explorer",
+  "modelYear": "2021",
+  "body": "N/A",
+  "description": "2021 FORD Explorer (N/A).\nEquipped with V-Shaped 3.0L, and features like Automatic Headlights, Auxiliary heating, Cargo Net, Electrochromic Interior Rearview Mirror.\nA great choice for those seeking comfort, performance, and reliability.",
+  "features": [
+    "Automatic Headlights",
+    "Auxiliary heating",
+    "Cargo Net",
+    "Electrochromic Interior Rearview Mirror"
+  ],
+  "engine": {
+    "type": "V-Shaped 3.0L",
+    "transmission": "N/A",
+    "drive": "4WD/4-Wheel Drive/4x4",
+    "fuelType": "Gasoline",
+    "cylinders": "6",
+    "displacement": "3.0"
+  },
+  "exterior": {
+    "color": "white"
+  },
+  "interior": {
+    "color": ""
+  },
+  "mileage": "23470",
+  "condition": "Used",
+  "pricing": {
+    "price": "24000",
+    "salesPrice": "23000",
+    "financingPerMonth": 467
+  },
+  "additionalFeatures": [],
+  "safety": [],
+  "deletedImages": [],
+  "timestamp": "2025-06-30T19:23:03.693Z",
+  "images": [
+    {
+      "filename": "1751311384050-2014 Chevrolet Silverado 1500 - webp - (1).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384050-2014 Chevrolet Silverado 1500 - webp - (1).webp"
+    },
+    {
+      "filename": "1751311384066-2014 Chevrolet Silverado 1500 - webp - (2).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384066-2014 Chevrolet Silverado 1500 - webp - (2).webp"
+    },
+    {
+      "filename": "1751311384077-2014 Chevrolet Silverado 1500 - webp - (3).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384077-2014 Chevrolet Silverado 1500 - webp - (3).webp"
+    },
+    {
+      "filename": "1751311384084-2014 Chevrolet Silverado 1500 - webp - (4).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384084-2014 Chevrolet Silverado 1500 - webp - (4).webp"
+    },
+    {
+      "filename": "1751311384093-2014 Chevrolet Silverado 1500 - webp - (5).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384093-2014 Chevrolet Silverado 1500 - webp - (5).webp"
+    },
+    {
+      "filename": "1751311384100-2014 Chevrolet Silverado 1500 - webp - (6).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384100-2014 Chevrolet Silverado 1500 - webp - (6).webp"
+    },
+    {
+      "filename": "1751311384108-2014 Chevrolet Silverado 1500 - webp - (7).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384108-2014 Chevrolet Silverado 1500 - webp - (7).webp"
+    },
+    {
+      "filename": "1751311384117-2014 Chevrolet Silverado 1500 - webp - (8).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384117-2014 Chevrolet Silverado 1500 - webp - (8).webp"
+    },
+    {
+      "filename": "1751311384125-2014 Chevrolet Silverado 1500 - webp - (9).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384125-2014 Chevrolet Silverado 1500 - webp - (9).webp"
+    },
+    {
+      "filename": "1751311384134-2014 Chevrolet Silverado 1500 - webp - (10).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384134-2014 Chevrolet Silverado 1500 - webp - (10).webp"
+    },
+    {
+      "filename": "1751311384143-2014 Chevrolet Silverado 1500 - webp - (11).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384143-2014 Chevrolet Silverado 1500 - webp - (11).webp"
+    },
+    {
+      "filename": "1751311384151-2014 Chevrolet Silverado 1500 - webp - (12).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384151-2014 Chevrolet Silverado 1500 - webp - (12).webp"
+    },
+    {
+      "filename": "1751311384155-2014 Chevrolet Silverado 1500 - webp - (13).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384155-2014 Chevrolet Silverado 1500 - webp - (13).webp"
+    },
+    {
+      "filename": "1751311384161-2014 Chevrolet Silverado 1500 - webp - (14).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384161-2014 Chevrolet Silverado 1500 - webp - (14).webp"
+    },
+    {
+      "filename": "1751311384168-2014 Chevrolet Silverado 1500 - webp - (15).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384168-2014 Chevrolet Silverado 1500 - webp - (15).webp"
+    },
+    {
+      "filename": "1751311384172-2014 Chevrolet Silverado 1500 - webp - (16).webp",
+      "path": "/api/images/1FM5K8GC2MGB21183-FORD-Explorer/images/1751311384172-2014 Chevrolet Silverado 1500 - webp - (16).webp"
+    }
+  ],
+  "certificates": {}
+}
