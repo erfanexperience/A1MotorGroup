@@ -11,8 +11,6 @@ import BookTestDriveModal from '../components/BookTestDriveModal';
 import placeholderImage from '../assests/palceholder.webp';
 import weBuyImgMobile from '../assests/we-buy-mobile.webp';
 import financeImgMobile from '../assests/finance-mobile.webp';
-import weBuy from '../assests/we-buy.webp';
-import finance from '../assests/finance.webp';
 
 // Add font-face for Martel-Bold
 const MartelFontFace = `
@@ -931,7 +929,7 @@ const WeBuySection = styled.section`
   width: 100vw;
   height: 70vh;
   min-height: 420px;
-  background: url(${weBuy}) center center/cover no-repeat;
+  background: url(${require('../assests/we-buy.webp')}) center center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1161,13 +1159,12 @@ const MapCol = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 900px) {
-    padding: 20px 10px;
-    align-self: center;
-    width: 90%;
+    padding: 0 10px;
+    width: 100%;
     min-height: 240px;
     height: 240px;
     max-width: 100vw;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1;
   }
   iframe {
     width: 100%;
@@ -1182,7 +1179,7 @@ const FinancingSection = styled.section`
   width: 100vw;
   height: 60vh;
   min-height: 380px;
-  background: url(${finance}) center center/cover no-repeat;
+  background: url(${require('../assests/finance.webp')}) center center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: flex-start;

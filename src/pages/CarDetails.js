@@ -236,65 +236,55 @@ const CarDetails = () => {
                   </a>
                   <a
                     className="car-details-btn-secondary cert-btn"
-                    href={`http://localhost:5001/api/images/${car.vin}-${car.make}-${car.model}/certificates/window-sticker.pdf`}
+                    href={`http://localhost:5001/api/images/${car.vin}-${car.make}-${car.model}/certificates/autocheck.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaFilePdf /> View Window Sticker
+                    <FaFilePdf /> View AutoCheck Report
                   </a>
                 </>
               )}
             </div>
           </div>
         </div>
-        {/* Modal for full-size image */}
-        {showImageModal && (
-          <div className="car-details-image-modal" onClick={() => setShowImageModal(false)}>
-            <button className="car-details-close-modal" onClick={() => setShowImageModal(false)}>
+
+        {/* Financing Disclaimer */}
+        <div className="car-details-financing-disclaimer">
+          <p>
+            *Financing example: {car.modelYear || car.year} {car.make} {car.model} for ${car.pricing?.salesPrice ? Number(car.pricing.salesPrice).toLocaleString() : Number(car.pricing?.price || 0).toLocaleString()} at {car.pricing?.financingPerMonth ? Math.round((car.pricing.financingPerMonth * 72) / (car.pricing.salesPrice || car.pricing.price) * 10000) / 100 : 10.09}% APR for 72 months. Monthly payment of ${car.pricing?.financingPerMonth || 'N/A'}. Includes 9.375% California sales tax. Subject to approved credit. Terms and conditions apply.
+          </p>
+        </div>
+      </div>
+
+      {/* Image Modal */}
+      {showImageModal && (
+        <div className="car-details-image-modal-overlay" onClick={() => setShowImageModal(false)}>
+          <div className="car-details-image-modal-content" onClick={e => e.stopPropagation()}>
+            <button className="car-details-image-modal-close" onClick={() => setShowImageModal(false)}>
               <FaTimes />
             </button>
-            <img
-              src={car.images[selectedImage]?.path || car.images[selectedImage]}
-              alt={`Modal image: ${car.make} ${car.model}`}
-              className="car-details-modal-image"
+            <button className="car-details-image-modal-nav car-details-image-modal-prev" onClick={handlePrevImage}>
+              <FaChevronLeft />
+            </button>
+            <button className="car-details-image-modal-nav car-details-image-modal-next" onClick={handleNextImage}>
+              <FaChevronRight />
+            </button>
+            <img 
+              src={images[selectedImage]?.path || images[selectedImage] || placeholderImage} 
+              alt={`Gallery ${selectedImage + 1}`} 
             />
-            {car.images.length > 1 && (
-              <div className="car-details-modal-navigation">
-                <button onClick={handlePrevImage} className="car-details-modal-nav-button">
-                  <FaChevronLeft />
-                </button>
-                <button onClick={handleNextImage} className="car-details-modal-nav-button">
-                  <FaChevronRight />
-                </button>
-              </div>
-            )}
           </div>
-        )}
-        {/* Financing Disclaimer */}
-        {(() => {
-          const now = new Date();
-          const currentYear = now.getFullYear();
-          const modelYear = Number(car.modelYear || car.year) || currentYear;
-          const modelAge = Math.max(0, currentYear - modelYear);
-          const price = Number(car.pricing?.salesPrice || car.pricing?.price) || 0;
-          const tax = price * 0.09375;
-          return (
-            <div style={{ fontSize: '0.68rem', color: '#888', textAlign: 'center', margin: '2.5rem 0 0.5rem 0', maxWidth: 700, marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.5 }}>
-              *Estimated payments are for informational purposes only. They do not account for financing pre-qualifications, and they may or may not account for acquisition fees, destination charges, tax, title, and other fees and incentives or represent a financing offer or guarantee of credit from the seller. Monthly estimate based on a 10.09% APR for 72 months, {modelAge}-year vehicle model age, ${price.toLocaleString()} vehicle price, $0 down payment, $0 trade-in, and ${tax.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} sales tax.
-            </div>
-          );
-        })()}
-        <BookTestDriveModal
-          isOpen={isBookModalOpen}
-          onClose={() => setIsBookModalOpen(false)}
-          cars={[car]}
-          preselectedCarVin={car.vin}
-          onSubmit={() => setIsBookModalOpen(false)}
-        />
-      </div>
-      <Footer />
+        </div>
+      )}
+
+      {/* Book Test Drive Modal */}
+      <BookTestDriveModal 
+        isOpen={isBookModalOpen} 
+        onClose={() => setIsBookModalOpen(false)}
+        selectedCar={car}
+      />
     </>
   );
-};
+}
 
 export default CarDetails;
