@@ -127,7 +127,6 @@ async function uploadToS3(buffer, key, mimetype) {
     Key: key,
     Body: buffer,
     ContentType: mimetype,
-    ACL: 'public-read',
   };
   const data = await s3.upload(params).promise();
   return data.Location;
