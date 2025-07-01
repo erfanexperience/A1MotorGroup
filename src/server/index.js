@@ -3,7 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs').promises;
 const cors = require('cors');
-const pool = require('./db');
+const { pool, s3 } = require('./db');
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -120,6 +120,19 @@ app.get('/api/vehicles', async (req, res) => {
   }
 });
 
+// Helper to upload a file buffer to S3
+async function uploadToS3(buffer, key, mimetype) {
+  const params = {
+    Bucket: process.env.S3_BUCKET_NAME,
+    Key: key,
+    Body: buffer,
+    ContentType: mimetype,
+    ACL: 'public-read',
+  };
+  const data = await s3.upload(params).promise();
+  return data.Location;
+}
+
 // Add new vehicle
 app.post('/api/vehicles', upload.any(), async (req, res) => {
   try {
@@ -130,40 +143,31 @@ app.post('/api/vehicles', upload.any(), async (req, res) => {
     if (!vehicleData.vin || !vehicleData.make || !vehicleData.model) {
       return res.status(400).json({ error: 'Missing required vehicle information' });
     }
-    // Handle file uploads (images/certificates)
     const folderName = `${vehicleData.vin}-${vehicleData.make}-${vehicleData.model}`;
-    const imagesDir = path.join(__dirname, '../../Cars', folderName, 'images');
-    const certsDir = path.join(__dirname, '../../Cars', folderName, 'certificates');
-    await fs.mkdir(imagesDir, { recursive: true });
-    await fs.mkdir(certsDir, { recursive: true });
     vehicleData.images = [];
     vehicleData.certificates = {};
-    let carfaxPath = null;
-    let windowStickerPath = null;
+    let carfaxUrl = null;
+    let windowStickerUrl = null;
     for (const file of req.files || []) {
-      let destPath;
+      let s3Key;
       if (file.fieldname === 'images') {
-        destPath = path.join(imagesDir, file.filename);
-        vehicleData.images.push({
-          filename: file.filename,
-          path: `/api/images/${folderName}/images/${file.filename}`
-        });
-        await fs.rename(file.path, destPath);
+        s3Key = `${folderName}/images/${file.filename}`;
+        const url = await uploadToS3(await fs.readFile(file.path), s3Key, file.mimetype);
+        vehicleData.images.push({ filename: file.filename, url });
+        await fs.unlink(file.path);
       } else if (file.fieldname === 'carfax') {
-        const certName = `carfax.pdf`;
-        destPath = path.join(certsDir, certName);
-        await fs.rename(file.path, destPath);
-        carfaxPath = `/api/images/${folderName}/certificates/${certName}`;
+        s3Key = `${folderName}/certificates/carfax.pdf`;
+        carfaxUrl = await uploadToS3(await fs.readFile(file.path), s3Key, file.mimetype);
+        await fs.unlink(file.path);
       } else if (file.fieldname === 'windowSticker') {
-        const certName = `window-sticker.pdf`;
-        destPath = path.join(certsDir, certName);
-        await fs.rename(file.path, destPath);
-        windowStickerPath = `/api/images/${folderName}/certificates/${certName}`;
+        s3Key = `${folderName}/certificates/window-sticker.pdf`;
+        windowStickerUrl = await uploadToS3(await fs.readFile(file.path), s3Key, file.mimetype);
+        await fs.unlink(file.path);
       }
     }
-    if (carfaxPath) vehicleData.certificates.carfax = carfaxPath;
-    if (windowStickerPath) vehicleData.certificates.windowSticker = windowStickerPath;
-    // Insert into PostgreSQL
+    if (carfaxUrl) vehicleData.certificates.carfax = carfaxUrl;
+    if (windowStickerUrl) vehicleData.certificates.windowSticker = windowStickerUrl;
+    // Insert into PostgreSQL (same as before, but now URLs are S3 URLs)
     const insertQuery = `
       INSERT INTO vehicles (
         vin, make, model, model_year, price, sales_price, condition, body, transmission, fuel_type, engine, drive, mileage, exterior_color, interior_color, stock_number, description, features, certificates, images
@@ -210,34 +214,25 @@ app.put('/api/vehicles', upload.any(), async (req, res) => {
     if (!vehicleData.vin || !vehicleData.make || !vehicleData.model) {
       return res.status(400).json({ error: 'Missing required vehicle information' });
     }
-    // Handle file uploads (images/certificates)
     const folderName = `${vehicleData.vin}-${vehicleData.make}-${vehicleData.model}`;
-    const imagesDir = path.join(__dirname, '../../Cars', folderName, 'images');
-    const certsDir = path.join(__dirname, '../../Cars', folderName, 'certificates');
-    await fs.mkdir(imagesDir, { recursive: true });
-    await fs.mkdir(certsDir, { recursive: true });
-    let carfaxPath = null;
-    let windowStickerPath = null;
+    let carfaxUrl = null;
+    let windowStickerUrl = null;
     let newImages = [];
     for (const file of req.files || []) {
-      let destPath;
+      let s3Key;
       if (file.fieldname === 'images') {
-        destPath = path.join(imagesDir, file.filename);
-        newImages.push({
-          filename: file.filename,
-          path: `/api/images/${folderName}/images/${file.filename}`
-        });
-        await fs.rename(file.path, destPath);
+        s3Key = `${folderName}/images/${file.filename}`;
+        const url = await uploadToS3(await fs.readFile(file.path), s3Key, file.mimetype);
+        newImages.push({ filename: file.filename, url });
+        await fs.unlink(file.path);
       } else if (file.fieldname === 'carfax') {
-        const certName = `carfax.pdf`;
-        destPath = path.join(certsDir, certName);
-        await fs.rename(file.path, destPath);
-        carfaxPath = `/api/images/${folderName}/certificates/${certName}`;
+        s3Key = `${folderName}/certificates/carfax.pdf`;
+        carfaxUrl = await uploadToS3(await fs.readFile(file.path), s3Key, file.mimetype);
+        await fs.unlink(file.path);
       } else if (file.fieldname === 'windowSticker') {
-        const certName = `window-sticker.pdf`;
-        destPath = path.join(certsDir, certName);
-        await fs.rename(file.path, destPath);
-        windowStickerPath = `/api/images/${folderName}/certificates/${certName}`;
+        s3Key = `${folderName}/certificates/window-sticker.pdf`;
+        windowStickerUrl = await uploadToS3(await fs.readFile(file.path), s3Key, file.mimetype);
+        await fs.unlink(file.path);
       }
     }
     // Merge new images with existing images (if any)
@@ -247,8 +242,8 @@ app.put('/api/vehicles', upload.any(), async (req, res) => {
     }
     // Update certificates
     let certificates = vehicleData.certificates || {};
-    if (carfaxPath) certificates.carfax = carfaxPath;
-    if (windowStickerPath) certificates.windowSticker = windowStickerPath;
+    if (carfaxUrl) certificates.carfax = carfaxUrl;
+    if (windowStickerUrl) certificates.windowSticker = windowStickerUrl;
     // Update in PostgreSQL
     const updateQuery = `
       UPDATE vehicles SET
