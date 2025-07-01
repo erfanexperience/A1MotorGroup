@@ -3,6 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs').promises;
 const cors = require('cors');
+const pool = require('./db');
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -96,62 +97,26 @@ const handleMulterError = (err, req, res, next) => {
   next(err);
 };
 
-// Check if vehicle exists
+// Get vehicle by VIN
 app.get('/api/vehicles/:vin', async (req, res) => {
   try {
-    const carsDir = path.join(__dirname, '../../Cars');
-    const folders = await fs.readdir(carsDir);
-    const exists = folders.some(folder => folder.startsWith(req.params.vin));
-    
-    if (exists) {
-      res.status(200).json({ exists: true });
-    } else {
-      res.status(404).json({ exists: false });
+    const result = await pool.query('SELECT * FROM vehicles WHERE vin = $1', [req.params.vin]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ exists: false });
     }
+    res.status(200).json(result.rows[0]);
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      res.status(404).json({ exists: false });
-    } else {
-      res.status(500).json({ error: error.message });
-    }
+    res.status(500).json({ error: error.message });
   }
 });
 
 // Get all vehicles
 app.get('/api/vehicles', async (req, res) => {
   try {
-    const carsDir = path.join(__dirname, '../../Cars');
-    const folders = await fs.readdir(carsDir);
-    
-    const vehicles = await Promise.all(
-      folders.map(async (folder) => {
-        try {
-          const vehiclePath = path.join(carsDir, folder);
-          const dataFile = path.join(vehiclePath, 'data.json');
-          const imagesDir = path.join(vehiclePath, 'images');
-          
-          const data = JSON.parse(await fs.readFile(dataFile, 'utf-8'));
-          const images = await fs.readdir(imagesDir);
-          
-          return {
-            ...data,
-            mainImage: images.length > 0 ? `/api/images/${folder}/images/${images[0]}` : null,
-            images: images.map(image => `/api/images/${folder}/images/${image}`)
-          };
-        } catch (error) {
-          console.error(`Error processing vehicle folder ${folder}:`, error);
-          return null;
-        }
-      })
-    );
-    
-    res.json(vehicles.filter(v => v !== null));
+    const result = await pool.query('SELECT * FROM vehicles ORDER BY created_at DESC');
+    res.json(result.rows);
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      res.json([]);
-    } else {
-      res.status(500).json({ error: error.message });
-    }
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -165,14 +130,12 @@ app.post('/api/vehicles', upload.any(), async (req, res) => {
     if (!vehicleData.vin || !vehicleData.make || !vehicleData.model) {
       return res.status(400).json({ error: 'Missing required vehicle information' });
     }
+    // Handle file uploads (images/certificates)
     const folderName = `${vehicleData.vin}-${vehicleData.make}-${vehicleData.model}`;
-    const folderPath = path.join(__dirname, '../../Cars', folderName);
-    const imagesDir = path.join(folderPath, 'images');
-    const certsDir = path.join(folderPath, 'certificates');
+    const imagesDir = path.join(__dirname, '../../Cars', folderName, 'images');
+    const certsDir = path.join(__dirname, '../../Cars', folderName, 'certificates');
     await fs.mkdir(imagesDir, { recursive: true });
     await fs.mkdir(certsDir, { recursive: true });
-    
-    // Move files from tmp to correct folders
     vehicleData.images = [];
     vehicleData.certificates = {};
     let carfaxPath = null;
@@ -187,184 +150,156 @@ app.post('/api/vehicles', upload.any(), async (req, res) => {
         });
         await fs.rename(file.path, destPath);
       } else if (file.fieldname === 'carfax') {
-        // Always save as carfax.pdf
         const certName = `carfax.pdf`;
         destPath = path.join(certsDir, certName);
         await fs.rename(file.path, destPath);
         carfaxPath = `/api/images/${folderName}/certificates/${certName}`;
       } else if (file.fieldname === 'windowSticker') {
-        // Always save as window-sticker.pdf
         const certName = `window-sticker.pdf`;
         destPath = path.join(certsDir, certName);
         await fs.rename(file.path, destPath);
         windowStickerPath = `/api/images/${folderName}/certificates/${certName}`;
-      } else {
-        // Unknown field, skip
-        continue;
-      }
-    }
-    // After moving files, robustly rename any certificate files to the correct VIN-based names
-    const certFiles = await fs.readdir(certsDir);
-    for (const file of certFiles) {
-      if (file === 'carfax' || file === 'carfax.pdf') {
-        const correctName = `${vehicleData.vin}-Carfax.pdf`;
-        await fs.rename(
-          path.join(certsDir, file),
-          path.join(certsDir, correctName)
-        );
-        carfaxPath = `/api/images/${folderName}/certificates/${correctName}`;
-      }
-      if (file === 'window-sticker' || file === 'window-sticker.pdf') {
-        const correctName = `${vehicleData.vin}-WindowSticker.pdf`;
-        await fs.rename(
-          path.join(certsDir, file),
-          path.join(certsDir, correctName)
-        );
-        windowStickerPath = `/api/images/${folderName}/certificates/${correctName}`;
       }
     }
     if (carfaxPath) vehicleData.certificates.carfax = carfaxPath;
     if (windowStickerPath) vehicleData.certificates.windowSticker = windowStickerPath;
-    
-    // Save vehicle data
-    await fs.writeFile(
-      path.join(folderPath, 'data.json'),
-      JSON.stringify(vehicleData, null, 2)
-    );
-    res.status(201).json({ 
-      message: 'Vehicle added successfully',
-      vehicle: vehicleData
-    });
+    // Insert into PostgreSQL
+    const insertQuery = `
+      INSERT INTO vehicles (
+        vin, make, model, model_year, price, sales_price, condition, body, transmission, fuel_type, engine, drive, mileage, exterior_color, interior_color, stock_number, description, features, certificates, images
+      ) VALUES (
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20
+      ) RETURNING *;
+    `;
+    const values = [
+      vehicleData.vin,
+      vehicleData.make,
+      vehicleData.model,
+      vehicleData.modelYear || vehicleData.year || null,
+      vehicleData.pricing?.price || null,
+      vehicleData.pricing?.salesPrice || null,
+      vehicleData.condition || null,
+      vehicleData.body || null,
+      vehicleData.engine?.transmission || vehicleData.transmission || null,
+      vehicleData.engine?.fuelType || vehicleData.fuelType || null,
+      vehicleData.engine ? JSON.stringify(vehicleData.engine) : null,
+      vehicleData.engine?.drive || vehicleData.driveType || vehicleData.drivetrain || null,
+      vehicleData.mileage || null,
+      vehicleData.exterior?.color || vehicleData.exteriorColor || vehicleData.color || null,
+      vehicleData.interior?.color || vehicleData.interiorColor || null,
+      vehicleData.stockNumber || null,
+      vehicleData.description || null,
+      vehicleData.features ? JSON.stringify(vehicleData.features) : null,
+      vehicleData.certificates ? JSON.stringify(vehicleData.certificates) : null,
+      vehicleData.images ? JSON.stringify(vehicleData.images) : null
+    ];
+    const result = await pool.query(insertQuery, values);
+    res.status(201).json({ message: 'Vehicle added successfully', vehicle: result.rows[0] });
   } catch (error) {
-    console.error('Error saving vehicle:', error);
     res.status(500).json({ error: error.message });
   }
 });
 
 // Update vehicle
 app.put('/api/vehicles', upload.any(), async (req, res) => {
-  console.log('Received vehicle update request');
   try {
     if (!req.body.vehicleData) {
-      console.error('No vehicle data provided');
       return res.status(400).json({ error: 'No vehicle data provided' });
     }
-
     const vehicleData = JSON.parse(req.body.vehicleData);
-    console.log('Parsed vehicle data:', {
-      vin: vehicleData.vin,
-      make: vehicleData.make,
-      model: vehicleData.model,
-      imagesCount: vehicleData.images?.length,
-      deletedImagesCount: vehicleData.deletedImages?.length
-    });
-
     if (!vehicleData.vin || !vehicleData.make || !vehicleData.model) {
-      console.error('Missing required vehicle information');
       return res.status(400).json({ error: 'Missing required vehicle information' });
     }
-
+    // Handle file uploads (images/certificates)
     const folderName = `${vehicleData.vin}-${vehicleData.make}-${vehicleData.model}`;
-    const folderPath = path.join(__dirname, '../../Cars', folderName);
-    
-    // Handle deleted images
-    if (vehicleData.deletedImages && vehicleData.deletedImages.length > 0) {
-      console.log('Processing deleted images:', vehicleData.deletedImages);
-      for (const imagePath of vehicleData.deletedImages) {
-        try {
-          // Extract filename from the path
-          const filename = imagePath.split('/').pop();
-          const imageFilePath = path.join(folderPath, 'images', filename);
-          console.log('Attempting to delete image file:', imageFilePath);
-          
-          // Check if file exists before trying to delete
-          try {
-            await fs.access(imageFilePath);
-            await fs.unlink(imageFilePath);
-            console.log('Successfully deleted image:', filename);
-          } catch (error) {
-            if (error.code === 'ENOENT') {
-              console.log('Image file not found:', filename);
-            } else {
-              throw error;
-            }
-          }
-        } catch (error) {
-          console.error('Error deleting image:', error);
-          // Continue with other deletions even if one fails
-        }
-      }
-    }
-
-    // Add uploaded files information to vehicle data while preserving existing ones
-    if (req.files && req.files.length > 0) {
-      // Group files by type
-      const images = req.files.filter(f => f.fieldname === 'images');
-      const carfax = req.files.find(f => f.fieldname === 'carfax');
-      const windowSticker = req.files.find(f => f.fieldname === 'windowSticker');
-
-      // Add images
-      let newImages = [];
-      if (images.length > 0) {
-        newImages = images.map(file => ({
+    const imagesDir = path.join(__dirname, '../../Cars', folderName, 'images');
+    const certsDir = path.join(__dirname, '../../Cars', folderName, 'certificates');
+    await fs.mkdir(imagesDir, { recursive: true });
+    await fs.mkdir(certsDir, { recursive: true });
+    let carfaxPath = null;
+    let windowStickerPath = null;
+    let newImages = [];
+    for (const file of req.files || []) {
+      let destPath;
+      if (file.fieldname === 'images') {
+        destPath = path.join(imagesDir, file.filename);
+        newImages.push({
           filename: file.filename,
           path: `/api/images/${folderName}/images/${file.filename}`
-        }));
-        for (const file of images) {
-          await fs.rename(file.path, path.join(folderPath, 'images', file.filename));
-        }
-      }
-      // Filter out deleted images from existing images
-      const existingImages = (vehicleData.images || []).filter(img => {
-        const isDeleted = vehicleData.deletedImages?.includes(img);
-        if (isDeleted) {
-          console.log('Filtering out deleted image:', img);
-        }
-        return !isDeleted;
-      });
-      vehicleData.images = [...existingImages, ...newImages];
-
-      // Add certificates
-      vehicleData.certificates = vehicleData.certificates || {};
-      if (carfax) {
+        });
+        await fs.rename(file.path, destPath);
+      } else if (file.fieldname === 'carfax') {
         const certName = `carfax.pdf`;
-        const destPath = path.join(folderPath, 'certificates', certName);
-        await fs.rename(carfax.path, destPath);
-        vehicleData.certificates.carfax = `/api/images/${folderName}/certificates/${certName}`;
-      }
-      if (windowSticker) {
+        destPath = path.join(certsDir, certName);
+        await fs.rename(file.path, destPath);
+        carfaxPath = `/api/images/${folderName}/certificates/${certName}`;
+      } else if (file.fieldname === 'windowSticker') {
         const certName = `window-sticker.pdf`;
-        const destPath = path.join(folderPath, 'certificates', certName);
-        await fs.rename(windowSticker.path, destPath);
-        vehicleData.certificates.windowSticker = `/api/images/${folderName}/certificates/${certName}`;
+        destPath = path.join(certsDir, certName);
+        await fs.rename(file.path, destPath);
+        windowStickerPath = `/api/images/${folderName}/certificates/${certName}`;
       }
-    } else {
-      // If no new images, just filter out deleted ones
-      vehicleData.images = (vehicleData.images || []).filter(img => {
-        const isDeleted = vehicleData.deletedImages?.includes(img);
-        if (isDeleted) {
-          console.log('Filtering out deleted image:', img);
-        }
-        return !isDeleted;
-      });
-      console.log('Updated images array (no new uploads):', vehicleData.images);
     }
-    
-    // Remove deletedImages from the data before saving
-    delete vehicleData.deletedImages;
-    
-    // Save updated vehicle data
-    const dataFilePath = path.join(folderPath, 'data.json');
-    console.log('Saving updated vehicle data to:', dataFilePath);
-    await fs.writeFile(dataFilePath, JSON.stringify(vehicleData, null, 2));
-    
-    console.log('Vehicle updated successfully');
-    res.status(200).json({ 
-      message: 'Vehicle updated successfully',
-      vehicle: vehicleData
-    });
+    // Merge new images with existing images (if any)
+    let images = vehicleData.images || [];
+    if (newImages.length > 0) {
+      images = [...images, ...newImages];
+    }
+    // Update certificates
+    let certificates = vehicleData.certificates || {};
+    if (carfaxPath) certificates.carfax = carfaxPath;
+    if (windowStickerPath) certificates.windowSticker = windowStickerPath;
+    // Update in PostgreSQL
+    const updateQuery = `
+      UPDATE vehicles SET
+        make = $1,
+        model = $2,
+        model_year = $3,
+        price = $4,
+        sales_price = $5,
+        condition = $6,
+        body = $7,
+        transmission = $8,
+        fuel_type = $9,
+        engine = $10,
+        drive = $11,
+        mileage = $12,
+        exterior_color = $13,
+        interior_color = $14,
+        stock_number = $15,
+        description = $16,
+        features = $17,
+        certificates = $18,
+        images = $19,
+        updated_at = NOW()
+      WHERE vin = $20
+      RETURNING *;
+    `;
+    const values = [
+      vehicleData.make,
+      vehicleData.model,
+      vehicleData.modelYear || vehicleData.year || null,
+      vehicleData.pricing?.price || null,
+      vehicleData.pricing?.salesPrice || null,
+      vehicleData.condition || null,
+      vehicleData.body || null,
+      vehicleData.engine?.transmission || vehicleData.transmission || null,
+      vehicleData.engine?.fuelType || vehicleData.fuelType || null,
+      vehicleData.engine ? JSON.stringify(vehicleData.engine) : null,
+      vehicleData.engine?.drive || vehicleData.driveType || vehicleData.drivetrain || null,
+      vehicleData.mileage || null,
+      vehicleData.exterior?.color || vehicleData.exteriorColor || vehicleData.color || null,
+      vehicleData.interior?.color || vehicleData.interiorColor || null,
+      vehicleData.stockNumber || null,
+      vehicleData.description || null,
+      vehicleData.features ? JSON.stringify(vehicleData.features) : null,
+      certificates ? JSON.stringify(certificates) : null,
+      images ? JSON.stringify(images) : null,
+      vehicleData.vin
+    ];
+    const result = await pool.query(updateQuery, values);
+    res.status(200).json({ message: 'Vehicle updated successfully', vehicle: result.rows[0] });
   } catch (error) {
-    console.error('Error updating vehicle:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -372,16 +307,9 @@ app.put('/api/vehicles', upload.any(), async (req, res) => {
 // Delete vehicle
 app.delete('/api/vehicles/:vin', async (req, res) => {
   try {
-    const carsDir = path.join(__dirname, '../../Cars');
-    const folders = await fs.readdir(carsDir);
-    const folder = folders.find(f => f.startsWith(req.params.vin));
-    
-    if (folder) {
-      await fs.rm(path.join(carsDir, folder), { recursive: true });
-      res.json({ message: 'Vehicle deleted successfully' });
-    } else {
-      res.status(404).json({ error: 'Vehicle not found' });
-    }
+    // Optionally, delete files from filesystem here if you want
+    await pool.query('DELETE FROM vehicles WHERE vin = $1', [req.params.vin]);
+    res.json({ message: 'Vehicle deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
