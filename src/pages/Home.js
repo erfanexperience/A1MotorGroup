@@ -52,7 +52,18 @@ const Home = () => {
     const fetchVehicles = async () => {
       try {
         const response = await fetch('/api/vehicles');
-        const data = await response.json();
+        let data = await response.json();
+        data = data.map(car => ({
+          ...car,
+          pricing: {
+            price: car.price,
+            salesPrice: car.sales_price,
+            financingPerMonth: car.financing_per_month // if exists
+          },
+          images: Array.isArray(car.images)
+            ? car.images.map(img => img.url || img)
+            : []
+        }));
         setVehicles(data);
         
         // Extract unique makes
@@ -169,7 +180,7 @@ const Home = () => {
                     tabIndex={-1}
                   >
                     <CarImageWrapper as="div">
-                      <CarImage src={car.mainImage || placeholderImage} alt={`${car.modelYear || car.year || ''} ${car.make} ${car.model}`} />
+                      <CarImage src={car.images && car.images.length > 0 ? car.images[0] : placeholderImage} alt={`${car.modelYear || car.year || ''} ${car.make} ${car.model}`} />
                       <ImageOverlay />
                       <DealershipLogo src={logoMain} alt="A1 Motor Group" />
                     </CarImageWrapper>
@@ -370,7 +381,7 @@ const Home = () => {
                     tabIndex={-1}
                   >
                     <CarImageWrapper as="div">
-                      <CarImage src={car.mainImage || placeholderImage} alt={`${car.modelYear || car.year || ''} ${car.make} ${car.model}`} />
+                      <CarImage src={car.images && car.images.length > 0 ? car.images[0] : placeholderImage} alt={`${car.modelYear || car.year || ''} ${car.make} ${car.model}`} />
                 <ImageOverlay />
                 <DealershipLogo src={logoMain} alt="A1 Motor Group" />
               </CarImageWrapper>
