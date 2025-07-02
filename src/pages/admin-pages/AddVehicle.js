@@ -39,7 +39,7 @@ const AddVehicle = ({ onSuccess, existingData }) => {
       if (existingData.images && existingData.images.length > 0) {
         console.log('Loading existing images:', existingData.images);
         const formattedImages = existingData.images.map(image => {
-          const imagePath = image.path || image;
+          const imagePath = image.url || image.path || image;
           console.log('Processing image:', imagePath);
           return {
             file: null,
