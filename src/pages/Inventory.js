@@ -42,6 +42,18 @@ const Inventory = () => {
     const fetchCars = async () => {
       const res = await fetch('/api/vehicles');
       let data = await res.json();
+      // --- Fix: Map backend fields to expected frontend structure ---
+      data = data.map(car => ({
+        ...car,
+        pricing: {
+          price: car.price,
+          salesPrice: car.sales_price,
+          financingPerMonth: car.financing_per_month // if exists
+        },
+        images: Array.isArray(car.images)
+          ? car.images.map(img => img.url || img)
+          : []
+      }));
       // Sort by upload time (descending)
       data = data.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
       setCars(data);

@@ -38,8 +38,19 @@ const CarDetails = () => {
     const fetchCarDetails = async () => {
       try {
         const response = await axios.get('/api/vehicles');
-        const foundCar = response.data.find(vehicle => vehicle.vin === vin);
+        let foundCar = response.data.find(vehicle => vehicle.vin === vin);
         if (foundCar) {
+          foundCar = {
+            ...foundCar,
+            pricing: {
+              price: foundCar.price,
+              salesPrice: foundCar.sales_price,
+              financingPerMonth: foundCar.financing_per_month // if exists
+            },
+            images: Array.isArray(foundCar.images)
+              ? foundCar.images.map(img => img.url || img)
+              : []
+          };
           setCar(foundCar);
         } else {
           setError('Car not found');
