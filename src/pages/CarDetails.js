@@ -254,22 +254,28 @@ const CarDetails = () => {
             <div className="car-details-cert-buttons">
               {car && (
                 <>
-                  <a
-                    className="car-details-btn-secondary cert-btn"
-                    href={`http://localhost:5001/api/images/${car.vin}-${car.make}-${car.model}/certificates/carfax.pdf`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaFilePdf /> View Carfax Report
-                  </a>
-                  <a
-                    className="car-details-btn-secondary cert-btn"
-                    href={`http://localhost:5001/api/images/${car.vin}-${car.make}-${car.model}/certificates/autocheck.pdf`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaFilePdf /> View AutoCheck Report
-                  </a>
+                  {car.certificates?.carfax && (
+                    <a
+                      className="car-details-btn-secondary cert-btn"
+                      href={car.certificates.carfax}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download
+                    >
+                      <FaFilePdf /> View Carfax Report
+                    </a>
+                  )}
+                  {car.certificates?.windowSticker && (
+                    <a
+                      className="car-details-btn-secondary cert-btn"
+                      href={car.certificates.windowSticker}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download
+                    >
+                      <FaFilePdf /> View Window Sticker
+                    </a>
+                  )}
                 </>
               )}
             </div>
