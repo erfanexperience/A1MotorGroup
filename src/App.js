@@ -5,7 +5,7 @@ import AdminAuth from './pages/admin-pages/AdminAuth';
 import Inventory from './pages/Inventory';
 import AddVehicle from './pages/admin-pages/AddVehicle';
 import Home from './pages/Home';
-import CarDetails from './pages/CarDetails';
+import CarDetailsV2 from './pages/CarDetailsV2';
 import GlobalStyles from './styles/GlobalStyles';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
@@ -23,7 +23,7 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/car/:id" element={<CarDetails />} />
+        <Route path="/car/:id" element={<CarDetailsV2 />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/sell" element={<SellYourCar />} />
