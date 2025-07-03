@@ -327,8 +327,16 @@ app.use('/api/images', express.static(path.join(__dirname, '../../Cars')));
 // Serve static files from the React app build
 app.use(express.static(path.join(__dirname, '../../build')));
 
-// Catch-all: send back React's index.html for any non-API route
-app.get(/^\/(?!api).*/, (req, res) => {
+// Serve manifest.json and other static assets explicitly
+app.get('/manifest.json', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../build', 'manifest.json'));
+});
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../build', 'favicon.ico'));
+});
+
+// Catch-all: send back React's index.html for any non-API, non-static route
+app.get(/^\/(?!api|static|manifest\.json|favicon\.ico).*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
 
