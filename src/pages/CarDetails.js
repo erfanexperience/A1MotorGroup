@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { 
   FaShareAlt, 
   FaPrint, 
@@ -310,7 +311,8 @@ const CarDetails = () => {
         onClose={() => setIsBookModalOpen(false)}
         selectedCar={car}
       />
-      </div>
+      <Footer />
+    </div>
   );
 }
 
