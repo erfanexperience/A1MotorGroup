@@ -18,7 +18,6 @@ import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 function App() {
   return (
     <Router>
-      <GlobalStyles />
       <AdminAuthProvider>
       <Routes>
         {/* Public Routes */}
