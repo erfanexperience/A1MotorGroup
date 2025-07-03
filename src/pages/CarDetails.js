@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import axios from 'axios';
 import './CarDetails.css';
 import placeholderImage from '../assests/palceholder.webp';
+import ImageGallery from '../components/ImageGallery';
 
 const CarDetails = () => {
   const { id } = useParams();
@@ -47,39 +48,11 @@ const CarDetails = () => {
   if (error) return <div className="error">{error}</div>;
   if (!car) return <div className="error">Car not found</div>;
 
-  const images = car.images || [];
-  const mainImage = images[0] || { path: placeholderImage };
-  const gridImages = images.slice(1, 5);
-  const hasMoreImages = images.length > 5;
-
   return (
     <>
       <Header />
       <div className="car-details-modern-fullpage car-details-main-section-padding">
-        <div className="car-details-gallery-outer-wrapper">
-          <div className="car-details-gallery-wrapper">
-            <div className="car-details-airbnb-gallery">
-              <div className="car-details-airbnb-main-image">
-                <img src={typeof mainImage === 'string' ? mainImage : mainImage.path || placeholderImage} alt="Main" />
-              </div>
-              <div className="car-details-airbnb-grid">
-                {gridImages.map((img, idx) => (
-                  <div
-                    key={idx}
-                    className="car-details-airbnb-grid-image"
-                  >
-                    <img src={typeof img === 'string' ? img : img.path || placeholderImage} alt={`Gallery ${idx + 2}`} />
-                    {hasMoreImages && idx === 3 && (
-                      <div className="car-details-airbnb-more-overlay">
-                        Show all photos
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <ImageGallery images={car.images || []} />
       </div>
       <Footer />
     </>
