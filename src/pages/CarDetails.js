@@ -60,7 +60,7 @@ const CarDetails = () => {
           <div className="car-details-gallery-wrapper">
             <div className="car-details-airbnb-gallery">
               <div className="car-details-airbnb-main-image">
-                <img src={mainImage?.path || mainImage || placeholderImage} alt="Main" />
+                <img src={typeof mainImage === 'string' ? mainImage : mainImage.path || placeholderImage} alt="Main" />
               </div>
               <div className="car-details-airbnb-grid">
                 {gridImages.map((img, idx) => (
@@ -68,7 +68,7 @@ const CarDetails = () => {
                     key={idx}
                     className="car-details-airbnb-grid-image"
                   >
-                    <img src={img.path || img} alt={`Gallery ${idx + 2}`} />
+                    <img src={typeof img === 'string' ? img : img.path || placeholderImage} alt={`Gallery ${idx + 2}`} />
                     {hasMoreImages && idx === 3 && (
                       <div className="car-details-airbnb-more-overlay">
                         Show all photos
