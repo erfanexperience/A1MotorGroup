@@ -14,6 +14,7 @@ import Financing from './pages/Financing';
 import AdminInventory from './pages/admin-pages/Inventory';
 import { AdminAuthProvider } from './contexts/AdminAuthContext';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
+import TestPage from './pages/TestPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/sell" element={<SellYourCar />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/financing" element={<Financing />} />
+        <Route path="/test" element={<TestPage />} />
         
         {/* Admin Login Route (unprotected) */}
         <Route path="/admin/login" element={<AdminAuth />} />
