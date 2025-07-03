@@ -214,17 +214,17 @@ const CarDetails = () => {
             <div className="car-details-specs-item">
               <span className="car-details-specs-icon"><FaPalette /></span>
               <span className="car-details-specs-label">Exterior Color</span>
-              <span className="car-details-specs-value">{car.exterior?.color || car.exteriorColor || car.color || '-'}</span>
+              <span className="car-details-specs-value">{car.exterior_color || car.exterior?.color || car.exteriorColor || car.color || '-'}</span>
             </div>
             <div className="car-details-specs-item">
               <span className="car-details-specs-icon"><FaPalette /></span>
               <span className="car-details-specs-label">Interior Color</span>
-              <span className="car-details-specs-value">{car.interior?.color || car.interiorColor || '-'}</span>
+              <span className="car-details-specs-value">{car.interior_color || car.interior?.color || car.interiorColor || '-'}</span>
             </div>
             <div className="car-details-specs-item">
               <span className="car-details-specs-icon"><FaIdCard /></span>
               <span className="car-details-specs-label">Stock #</span>
-              <span className="car-details-specs-value">{car.stockNumber || '-'}</span>
+              <span className="car-details-specs-value">{car.stock_number || car.stockNumber || '-'}</span>
             </div>
           </div>
 
