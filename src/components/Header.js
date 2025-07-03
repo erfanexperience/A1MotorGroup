@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <Logo to="/home">
+      <Logo to="/">
         <LogoImage src={logoMain} alt="Luxury Car Dealership" />
       </Logo>
       <NavContainer isOpen={isMenuOpen}>

@@ -90,7 +90,7 @@ const CarDetails = () => {
   const hasMoreImages = images.length > 5;
 
   return (
-    <>
+    <div className="car-details-container">
       <Header />
       <div className="car-details-modern-fullpage car-details-main-section-padding">
         <div className="car-details-gallery-outer-wrapper">
@@ -284,25 +284,25 @@ const CarDetails = () => {
       </div>
 
       {/* Image Modal */}
-      {showImageModal && (
+        {showImageModal && (
         <div className="car-details-image-modal-overlay" onClick={() => setShowImageModal(false)}>
           <div className="car-details-image-modal-content" onClick={e => e.stopPropagation()}>
             <button className="car-details-image-modal-close" onClick={() => setShowImageModal(false)}>
               <FaTimes />
             </button>
             <button className="car-details-image-modal-nav car-details-image-modal-prev" onClick={handlePrevImage}>
-              <FaChevronLeft />
-            </button>
+                  <FaChevronLeft />
+                </button>
             <button className="car-details-image-modal-nav car-details-image-modal-next" onClick={handleNextImage}>
-              <FaChevronRight />
-            </button>
+                  <FaChevronRight />
+                </button>
             <img 
               src={images[selectedImage]?.path || images[selectedImage] || placeholderImage} 
               alt={`Gallery ${selectedImage + 1}`} 
             />
+              </div>
           </div>
-        </div>
-      )}
+        )}
 
       {/* Book Test Drive Modal */}
       <BookTestDriveModal 
@@ -310,7 +310,7 @@ const CarDetails = () => {
         onClose={() => setIsBookModalOpen(false)}
         selectedCar={car}
       />
-    </>
+      </div>
   );
 }
 

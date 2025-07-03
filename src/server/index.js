@@ -106,7 +106,7 @@ app.get('/api/vehicles/:vin', async (req, res) => {
     }
     res.status(200).json(result.rows[0]);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
   }
 });
 
@@ -116,8 +116,8 @@ app.get('/api/vehicles', async (req, res) => {
     const result = await pool.query('SELECT * FROM vehicles ORDER BY created_at DESC');
     res.json(result.rows);
   } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+      res.status(500).json({ error: error.message });
+    }
 });
 
 // Helper to upload a file buffer to S3
@@ -233,7 +233,7 @@ app.put('/api/vehicles', upload.any(), async (req, res) => {
         windowStickerUrl = await uploadToS3(await fs.readFile(file.path), s3Key, file.mimetype);
         await fs.unlink(file.path);
       }
-    }
+      }
     // Merge new images with existing images (if any)
     let images = vehicleData.images || [];
     if (newImages.length > 0) {
@@ -303,7 +303,7 @@ app.delete('/api/vehicles/:vin', async (req, res) => {
   try {
     // Optionally, delete files from filesystem here if you want
     await pool.query('DELETE FROM vehicles WHERE vin = $1', [req.params.vin]);
-    res.json({ message: 'Vehicle deleted successfully' });
+      res.json({ message: 'Vehicle deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

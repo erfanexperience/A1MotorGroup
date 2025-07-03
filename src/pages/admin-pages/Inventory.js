@@ -18,7 +18,18 @@ const Inventory = () => {
   const loadVehicles = async () => {
     try {
       const response = await fetch('/api/vehicles');
-      const data = await response.json();
+      let data = await response.json();
+      data = data.map(vehicle => ({
+        ...vehicle,
+        pricing: {
+          price: vehicle.price,
+          salesPrice: vehicle.sales_price,
+          financingPerMonth: vehicle.financing_per_month
+        },
+        images: Array.isArray(vehicle.images)
+          ? vehicle.images.map(img => img.url || img)
+          : []
+      }));
       setVehicles(data);
     } catch (error) {
       console.error('Error loading vehicles:', error);
@@ -103,7 +114,7 @@ const Inventory = () => {
             {vehicles.map(vehicle => (
               <VehicleCard key={vehicle.vin} className="vehicle-card-print">
                 <VehicleImage 
-                  src={vehicle.mainImage || placeholderImage} 
+                  src={vehicle.images && vehicle.images.length > 0 ? vehicle.images[0] : placeholderImage} 
                   alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`} 
                 />
                 <VehicleInfo>

@@ -22,30 +22,27 @@ function App() {
       <AdminAuthProvider>
       <Routes>
         {/* Public Routes */}
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/car/:id" element={<CarDetails />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/sell" element={<SellYourCar />} />
         <Route path="/inventory" element={<Inventory />} />
-          <Route path="/financing" element={<Financing />} />
+        <Route path="/financing" element={<Financing />} />
         
-          {/* Admin Login Route (unprotected) */}
+        {/* Admin Login Route (unprotected) */}
         <Route path="/admin/login" element={<AdminAuth />} />
         
         {/* Protected Admin Routes */}
-          <Route path="/admin" element={
-            <ProtectedAdminRoute>
-              <AdminLayout />
-            </ProtectedAdminRoute>
-          }>
-          <Route index element={<Navigate to="/admin/inventory" replace />} />
-            <Route path="inventory" element={<AdminInventory />} />
-          <Route path="inventory/edit/:vin" element={<AddVehicle />} />
-        </Route>
-
-        {/* Redirect root to home page */}
-        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/admin" element={
+          <ProtectedAdminRoute>
+            <AdminLayout />
+          </ProtectedAdminRoute>
+        }>
+        <Route index element={<Navigate to="/admin/inventory" replace />} />
+          <Route path="inventory" element={<AdminInventory />} />
+        <Route path="inventory/edit/:vin" element={<AddVehicle />} />
+      </Route>
       </Routes>
       </AdminAuthProvider>
     </Router>
