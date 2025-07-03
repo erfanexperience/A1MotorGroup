@@ -337,6 +337,14 @@ app.get(/^\/(?!api|static|manifest\.json|favicon\.ico|logo192\.png|logo512\.png|
   res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
 
+// Robust error logging for unhandled promise rejections and uncaught exceptions
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception thrown:', err);
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
   console.log(`CORS enabled for http://localhost:3001`);
